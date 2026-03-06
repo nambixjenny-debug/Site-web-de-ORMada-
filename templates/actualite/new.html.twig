@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une Actualité - ORMada{% endblock %}
+
+{% block body %}
+    <div class="max-w-4xl mx-auto h-[80vh] overflow-hidden flex flex-col pb-2">
+        <!-- Header -->
+        <div class="mb-3">
+            <div class="flex items-center justify-between mb-3">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-700 mb-1">✍️ Nouvelle Actualité</h1>
+                    <p class="text-gray-500 text-sm">Créer une nouvelle actualité pour votre site</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Card -->
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-green-100 flex flex-col flex-1">
+            <!-- Form Header Background -->
+            <div class="bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-3">
+                <h2 class="text-lg font-bold text-white">Détails de l'actualité</h2>
+            </div>
+
+            <!-- Form Content -->
+            <div class="p-5 overflow-y-auto flex-1">
+                {{ include('actualite/_form.html.twig') }}
+            </div>
+
+            {# <!-- Footer Actions -->
+            <div class="bg-gray-50 border-t border-gray-200 px-6 py-3 flex items-center justify-between flex-shrink-0">
+                <a href="{{ path('app_actualite_index') }}" class="text-gray-700 hover:text-gray-900 font-semibold flex items-center gap-2 transition-colors text-sm">
+                    <span>←</span>
+                    <span>Retour à la liste</span>
+                </a>
+                <p class="text-xs text-gray-600">Tous les champs marqués d'un * sont obligatoires</p>
+            </div>
+        </div> #}
+    </div>
+{% endblock %}

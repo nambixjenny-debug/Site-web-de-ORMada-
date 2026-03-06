@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Media{% endblock %}
+
+{% block body %}
+    <h1>Media</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ medium.id }}</td>
+            </tr>
+            <tr>
+                <th>Nomdufichier</th>
+                <td>{{ medium.nomdufichier }}</td>
+            </tr>
+            <tr>
+                <th>Typedufichier</th>
+                <td>{{ medium.typedufichier }}</td>
+            </tr>
+            <tr>
+                <th>Chemindufichier</th>
+                <td>{{ medium.chemindufichier }}</td>
+            </tr>
+            <tr>
+                <th>Uploadat</th>
+                <td>{{ medium.uploadat ? medium.uploadat|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_media_index') }}">back to list</a>
+
+    <a href="{{ path('app_media_edit', {'id': medium.id}) }}">edit</a>
+
+    {{ include('media/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacts - ORMada{% endblock %}
+
+{% block body %}
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="mb-12">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-5xl font-bold text-gray-700 mb-2">💬Messages et Contacts</h1>
+                    <p class="text-gray-600 text-md ">Gérez tous les contacts de l'ORMada de maniere simple</p>
+                </div>
+                <a href="{{ path('app_contact_new') }}" class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+                    ➕ Nouveau Contact
+                </a>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+        <div class="bg-white rounded-xl shadow-xl overflow-hidden border border-green-100">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 text-white">
+                        <tr>
+                            <th class="px-6 py-4 text-left font-semibold">ID</th>
+                            <th class="px-6 py-4 text-left font-semibold">Nom</th>
+                            <th class="px-6 py-4 text-left font-semibold">Email</th>
+                            <th class="px-6 py-4 text-left font-semibold">Titre</th>
+                            <th class="px-6 py-4 text-left font-semibold">Date</th>
+                            <th class="px-6 py-4 text-left font-semibold">Statut</th>
+                            <th class="px-6 py-4 text-left font-semibold">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-green-100">
+                    {% for contact in contacts %}
+                        <tr class="hover:bg-green-50 transition-colors">
+                            <td class="px-6 py-4 font-semibold text-gray-800">#{{ contact.id }}</td>
+                            <td class="px-6 py-4"><span class="font-semibold text-gray-800">{{ contact.nom }}</span></td>
+                            <td class="px-6 py-4"><a href="mailto:{{ contact.email }}" class="text-green-600 hover:text-green-800 hover:underline">{{ contact.email }}</a></td>
+                            <td class="px-6 py-4 text-gray-700">{{ contact.titre }}</td>
+                            <td class="px-6 py-4 text-gray-700">{{ contact.creerle ? contact.creerle|date('d/m/Y') : 'N/A' }}</td>
+                            <td class="px-6 py-4">
+                                {% if contact.dejalu %}
+                                    <span class="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">✓ Lu</span>
+                                {% else %}
+                                    <span class="inline-flex items-center gap-2 bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-semibold">🔴 Non lu</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4 flex gap-3">
+                                <a href="{{ path('app_contact_show', {'id': contact.id}) }}" class="text-green-600 hover:text-green-800 font-semibold hover:underline">👁️ Voir</a>
+                                <a href="{{ path('app_contact_edit', {'id': contact.id}) }}" class="text-blue-600 hover:text-blue-800 font-semibold hover:underline">✏️ Éditer</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="px-6 py-8 text-center text-gray-500">
+                                <div class="text-6xl mb-4">📭</div>
+                                <p class="text-lg font-semibold">Aucun contact trouvé</p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
