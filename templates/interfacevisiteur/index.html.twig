@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ORMada - Organisation pour la gestion et la valorisation du patrimoine culturel de Madagascar">
+    <meta name="keywords" content="patrimoine, Madagascar, culture, Rova, ORMada">
+    <title>ORMada - Patrimoine Malagasy</title>
+    
+    {# Tailwind CSS #}
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    {# Styles personnalisés #}
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7));
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+{# HEADER / NAVBAR #}
+<header class="fixed top-0 left-0 w-full bg-green-600 shadow-lg z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-4 md:px-6 py-3">
+        {# Logo et nom #}
+        <div class="flex items-center gap-2 md:gap-3">
+            <img src="" 
+                 alt="Blason de Madagascar" 
+                 class="h-10 md:h-12">
+            <span class="text-white font-bold text-lg md:text-xl">ORMada</span>
+        </div>
+
+        {# Navigation desktop #}
+        <nav class="hidden md:flex gap-6 lg:gap-8 text-white font-semibold">
+            <a href="#actualites" class="hover:text-yellow-300 transition duration-300">Actualité</a>
+            <a href="#evenements" class="hover:text-yellow-300 transition duration-300">Événements</a>
+            <a href="#informations" class="hover:text-yellow-300 transition duration-300">Infos</a>
+            <a href="#apropos" class="hover:text-yellow-300 transition duration-300">À propos</a>
+            <a href="#contacts" class="hover:text-yellow-300 transition duration-300">Contacts</a>
+        </nav>
+
+        {# Bouton menu mobile #}
+        <button class="md:hidden text-white" onclick="toggleMobileMenu()" aria-label="Menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </div>
+
+    {# Menu mobile #}
+    <div id="mobileMenu" class="hidden md:hidden bg-green-700 px-4 py-3">
+        <nav class="flex flex-col gap-3 text-white font-semibold">
+            <a href="#actualites" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">Actualité</a>
+            <a href="#evenements" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">Événements</a>
+            <a href="#informations" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">Infos</a>
+            <a href="#apropos" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">À propos</a>
+            <a href="#contacts" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">Contacts</a>
+        </nav>
+    </div>
+</header>
+
+{# MAIN CONTENT #}
+<main>
+
+{# SECTION HERO #}
+<section class="min-h-screen bg-cover bg-center flex items-center justify-center text-center px-4 mt-16"
+         style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/5/5f/Rova_of_Antananarivo.jpg')">
+    <div class="hero-overlay p-6 md:p-10 rounded-lg text-white w-full max-w-2xl fade-in">
+        <p class="text-sm md:text-base mb-3 opacity-90">
+            Pour la gestion et le développement durable du patrimoine de Madagascar
+        </p>
+        <h1 class="text-3xl md:text-5xl font-bold mb-6">
+            Royan' Madagasikara
+        </h1>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <button class="bg-red-700 px-6 py-3 rounded-lg hover:bg-red-800 transition duration-300 font-semibold">
+                Histoire du Rova
+            </button>
+            <button class="bg-white text-black px-6 py-3 rounded-lg hover:bg-gray-200 transition duration-300 font-semibold">
+                En savoir plus
+            </button>
+        </div>
+    </div>
+</section>
+
+{# SECTION ACTUALITÉS #}
+<section id="actualites" class="py-16 md:py-20 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold text-center mb-12 md:mb-16">
+            Actualités
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div class="fade-in">
+                <h3 class="font-bold text-xl md:text-2xl mb-3">
+                    Titres de l'actualité ou de publication
+                </h3>
+                <h4 class="text-lg mb-4 font-semibold text-gray-700">
+                    Sous-titre de publications ou annonces
+                </h4>
+                <p class="text-gray-600 mb-6">
+                    TSAPIKY FESTIVAL — 27 au 28 Février à Toliary.<br>
+                    Hetisika manandratra ny kolontsaina malagasy sy ny mozika Tsapiky.
+                </p>
+                <button class="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition duration-300">
+                    Plus de détails
+                </button>
+            </div>
+            
+            <div class="fade-in">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format"
+                     alt="Festival culturel à Madagascar"
+                     class="rounded-xl shadow-lg w-full h-64 md:h-80 object-cover">
+            </div>
+        </div>
+    </div>
+</section>
+
+{# SECTION ÉVÉNEMENTS #}
+<section id="evenements" class="py-16 md:py-20">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold text-center mb-12 md:mb-16">
+            Événements
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+            {# Carte 1 #}
+            <div class="bg-white rounded-xl shadow-lg hover-lift">
+                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&auto=format"
+                     alt="Événement culturel"
+                     class="rounded-t-xl h-48 w-full object-cover">
+                <div class="p-5">
+                    <span class="text-sm text-green-600 font-semibold">15 Mars 2026</span>
+                    <h3 class="font-bold text-xl mb-2 mt-1">Événement culturel</h3>
+                    <p class="text-gray-600 mb-4">
+                        Promotion des traditions culturelles malagasy.
+                    </p>
+                    <a href="#" class="text-green-600 font-semibold hover:underline">Voir détails →</a>
+                </div>
+            </div>
+            
+            {# Carte 2 #}
+            <div class="bg-white rounded-xl shadow-lg hover-lift">
+                <img src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?w=600&auto=format"
+                     alt="Visite du patrimoine"
+                     class="rounded-t-xl h-48 w-full object-cover">
+                <div class="p-5">
+                    <span class="text-sm text-green-600 font-semibold">22 Mars 2026</span>
+                    <h3 class="font-bold text-xl mb-2 mt-1">Visite du patrimoine</h3>
+                    <p class="text-gray-600 mb-4">
+                        Découverte des patrimoines historiques de Madagascar.
+                    </p>
+                    <a href="#" class="text-green-600 font-semibold hover:underline">Voir détails →</a>
+                </div>
+            </div>
+            
+            {# Carte 3 #}
+            <div class="bg-white rounded-xl shadow-lg hover-lift">
+                <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600&auto=format"
+                     alt="Activité communautaire"
+                     class="rounded-t-xl h-48 w-full object-cover">
+                <div class="p-5">
+                    <span class="text-sm text-green-600 font-semibold">5 Avril 2026</span>
+                    <h3 class="font-bold text-xl mb-2 mt-1">Activité communautaire</h3>
+                    <p class="text-gray-600 mb-4">
+                        Participation des habitants à la protection du patrimoine.
+                    </p>
+                    <a href="#" class="text-green-600 font-semibold hover:underline">Voir détails →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# SECTION INFORMATIONS #}
+<section id="informations" class="py-16 md:py-20 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold text-center mb-12 md:mb-16">
+            Informations
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h3 class="text-red-600 font-bold text-xl mb-4">
+                    Cultures et fady
+                </h3>
+                <p class="text-gray-700 leading-relaxed">
+                    Ne pas pointer du doigt directement vers les tombeaux royaux ou le palais. 
+                    Ce geste est considéré comme irrespectueux. Respecter les traditions 
+                    culturelles et suivre les indications locales.
+                </p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h3 class="text-blue-600 font-bold text-xl mb-4">
+                    Tarifs
+                </h3>
+                <div class="text-gray-700 space-y-3">
+                    <div>
+                        <p class="font-semibold">🇲🇬 Malagasy et Résident :</p>
+                        <p class="ml-4">• Moins de 15 ans : 5 000 Ar</p>
+                        <p class="ml-4">• Plus de 15 ans : 10 000 Ar</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold">🌍 Etranger non résident :</p>
+                        <p class="ml-4">• Moins de 15 ans : 20 000 Ar</p>
+                        <p class="ml-4">• Plus de 15 ans : 40 000 Ar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# SECTION À PROPOS #}
+<section id="apropos" class="py-16 md:py-20">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold text-center mb-12 md:mb-16">
+            À propos de nous
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+            <div class="bg-white shadow-lg rounded-xl p-6 text-center hover-lift">
+                <h3 class="font-bold text-xl mb-3">Qui sommes-nous ?</h3>
+                <p class="text-gray-600">
+                    ORMada est une organisation dédiée à la gestion et à la valorisation 
+                    du patrimoine culturel de Madagascar.
+                </p>
+            </div>
+            
+            <div class="bg-white shadow-lg rounded-xl p-6 text-center hover-lift">
+                <h3 class="font-bold text-xl mb-3">Histoire de l'ORMada</h3>
+                <p class="text-gray-600 mb-4">
+                    L'organisation contribue à la préservation des sites historiques 
+                    et culturels du pays.
+                </p>
+                <button class="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition">
+                    En savoir plus
+                </button>
+            </div>
+            
+            <div class="bg-white shadow-lg rounded-xl p-6 text-center hover-lift">
+                <h3 class="font-bold text-xl mb-3">Nos Missions et Visions</h3>
+                <p class="text-gray-600">
+                    Assurer la protection durable du patrimoine malagasy et sensibiliser 
+                    les générations futures.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+{# FOOTER #}
+<footer id="contacts" class="bg-[#4b0000] text-white py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-8 md:gap-10">
+            <div>
+                <h3 class="text-green-400 font-bold text-lg mb-4">
+                    Navigation rapide
+                </h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-green-400 transition">Accueil</a></li>
+                    <li><a href="#apropos" class="hover:text-green-400 transition">À propos</a></li>
+                    <li><a href="#actualites" class="hover:text-green-400 transition">Actualités</a></li>
+                    <li><a href="#evenements" class="hover:text-green-400 transition">Événements</a></li>
+                    <li><a href="#contacts" class="hover:text-green-400 transition">Contacts</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-blue-400 font-bold text-lg mb-4">
+                    Informations de contact
+                </h3>
+                <p class="mb-2">Antananarivo, Madagascar</p>
+                <p class="mb-2">+261 34 00 000 00</p>
+                <p class="mb-2">contact@ormada.mg</p>
+            </div>
+            
+            <div>
+                <h3 class="font-bold text-lg mb-4">
+                    Réseaux sociaux
+                </h3>
+                <button onclick="openModal()"
+                        class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg transition duration-300 font-semibold">
+                    Contactez-nous
+                </button>
+            </div>
+        </div>
+        
+        <p class="text-center mt-10 pt-6 border-t border-red-800 text-sm">
+            © 2026 ORMada. Tous droits réservés
+        </p>
+    </div>
+</footer>
+
+{# MODAL DE CONTACT #}
+<div id="contactModal" 
+     class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4"
+     onclick="if(event.target===this) closeModal()">
+    
+    <div class="bg-white rounded-xl p-6 md:p-8 w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">
+            Contactez-nous
+        </h2>
+        
+        <form onsubmit="handleSubmit(event)" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Nom complet</label>
+                <input type="text" required 
+                       class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                       placeholder="Votre nom">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input type="email" required 
+                       class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                       placeholder="votre@email.com">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                <textarea required rows="4"
+                          class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          placeholder="Votre message..."></textarea>
+            </div>
+            
+            <div class="flex gap-3 pt-2">
+                <button type="submit" 
+                        class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-semibold flex-1">
+                    Envoyer
+                </button>
+                <button type="button"
+                        onclick="closeModal()"
+                        class="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition font-semibold">
+                    Annuler
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{# SCRIPTS #}
+<script>
+// Gestion de la modal
+function openModal() {
+    const modal = document.getElementById('contactModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden'; // Empêche le scroll
+}
+
+function closeModal() {
+    const modal = document.getElementById('contactModal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto'; // Restaure le scroll
+}
+
+// Gestion du menu mobile
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('hidden');
+}
+
+// Gestion de la soumission du formulaire
+function handleSubmit(e) {
+    e.preventDefault();
+    
+    // Simuler l'envoi du formulaire
+    alert('Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.');
+    closeModal();
+    
+    // Réinitialiser le formulaire
+    e.target.reset();
+}
+
+// Fermer la modal avec la touche Echap
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('contactModal');
+        if (!modal.classList.contains('hidden')) {
+            closeModal();
+        }
+    }
+});
+
+// Smooth scroll pour les ancres
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+</script>
+
+</body>
+</html>
