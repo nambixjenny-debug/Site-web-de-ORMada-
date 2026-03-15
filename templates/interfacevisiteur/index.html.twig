@@ -46,10 +46,10 @@
 <header class="fixed top-0 left-0 w-full bg-green-600 shadow-lg z-50">
     <div class="max-w-7xl mx-auto flex justify-between items-center px-4 md:px-6 py-3">
         {# Logo et nom #}
-        <div class="flex items-center gap-2 md:gap-3">
-            <img src="" 
-                 alt="Blason de Madagascar" 
-                 class="h-10 md:h-12">
+       <div class="flex items-center gap-2 md:gap-3">
+            <img src="images/logo.jpg" 
+                alt="Blason de Madagascar" 
+                class="h-12 w-12 md:h-15 md:w-15 rounded-full object-cover">
             <span class="text-white font-bold text-lg md:text-xl">ORMada</span>
         </div>
 
@@ -87,7 +87,7 @@
 
 {# SECTION HERO #}
 <section class="min-h-screen bg-cover bg-center flex items-center justify-center text-center px-4 mt-16"
-         style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/5/5f/Rova_of_Antananarivo.jpg')">
+         style="background-image:url('images/fondRova.jpg')">
     <div class="hero-overlay p-6 md:p-10 rounded-lg text-white w-full max-w-2xl fade-in">
         <p class="text-sm md:text-base mb-3 opacity-90">
             Pour la gestion et le développement durable du patrimoine de Madagascar
@@ -96,9 +96,12 @@
             Royan' Madagasikara
         </h1>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <button class="bg-red-700 px-6 py-3 rounded-lg hover:bg-red-800 transition duration-300 font-semibold">
-                Histoire du Rova
-            </button>
+            <a href="{{ path('app_histoire_du_rova') }}"
+                class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200 text-white font-semibold">
+                <span class="text-lg">🏰</span>
+                <span class="font-medium">Histoire du Rova</span>
+
+            </a>
             <button class="bg-white text-black px-6 py-3 rounded-lg hover:bg-gray-200 transition duration-300 font-semibold">
                 En savoir plus
             </button>
@@ -324,7 +327,7 @@
      onclick="if(event.target===this) closeModal()">
     
     <div class="bg-white rounded-xl p-6 md:p-8 w-full max-w-md">
-        <h2 class="text-2xl font-bold mb-6 text-gray-800">
+        <h2 class="text-2xl text-center font-bold mb-6 text-gray-800">
             Contactez-nous
         </h2>
         
@@ -342,6 +345,13 @@
                        class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                        placeholder="votre@email.com">
             </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Titre du message</label>
+                <input type="text" required 
+                       class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                       placeholder="Titre de votre message">
+            </div>
+            
             
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>

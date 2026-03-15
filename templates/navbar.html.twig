@@ -27,6 +27,12 @@
 
                 <!-- Menu Links -->
                 <ul class="py-6 space-y-2 px-4">
+                     <li>
+                        <a href="{{ path('app_page_accueil') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200 text-white {% if app.request.attributes.get('_route') == 'app_dashboard' %}bg-teal-500{% endif %}">
+                            <span class="text-lg">🏠</span>
+                            <span class="font-medium">Dashboard</span>
+                        </a>
+                    </li>
                    
                     <li>
                         <a href="{{ path('app_actualite_index') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200 text-white {% if app.request.attributes.get('_route') == 'app_actualite_index' %}bg-teal-500{% endif %}">
@@ -67,13 +73,7 @@
                     </a>
                 </div>
 
-               <div class="mb-4">
-                
-                    <a href="{{ path('app_page_accueil') }}"
-                        class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
-                        ← Retour
-                    </a>
-                </div>
+               
 
                 <!-- Footer Info -->
                 <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-green-700 bg-green-800">
