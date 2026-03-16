@@ -18,7 +18,7 @@
     <div class="max-w-7xl mx-auto flex justify-between items-center px-4 md:px-6 py-3">
         {# Logo et nom #}
        <div class="flex items-center gap-2 md:gap-3">
-            <img src="images/logo.jpg" 
+            <img src="{{ asset('images/Logo.jpg') }}"
                 alt="Blason de Madagascar" 
                 class="h-12 w-12 md:h-15 md:w-15 rounded-full object-cover">
             <span class="text-white font-bold text-lg md:text-xl">ORMada</span>
@@ -55,13 +55,19 @@
 </header>
 
     <!-- Hero Section -->
-    <header class="h-[70vh] hero-gradient flex items-center justify-center text-center text-white px-4">
+    <section class="h-[75vh] flex items-center justify-center text-center text-white px-4  bg-cover bg-center"
+style="background-image:url('{{ asset('images/fondRova.jpg') }}')">
+    
         <div class="max-w-3xl">
-            <h2 class="text-5xl md:text-7xl font-serif mb-4">Manjakamiadana</h2>
-            <p class="text-xl md:text-2xl font-light italic">"Où l'on règne dans la paix"</p>
-            <div class="mt-8 h-1 w-24 bg-red-600 mx-auto"></div>
+        
+                <h2 class="text-5xl md:text-7xl font-serif mb-4">Manjakamiadana</h2>
+                <h4 class="font-bold text-red-800 text-lg mb-2 underline">Le saviez-vous ?</h4>
+                <p class="text-xl md:text-2xl font-light  roman italic" style="font-family: 'Times New Roman', serif;">
+                    Le pilier central du palais Manjakamiadana original était un tronc de bois de rose géant de 39 mètres de haut. 
+                    Il a fallu 10 000 hommes pour le transporter de la forêt de l'Est jusqu'à la capitale.
+                </p>
         </div>
-    </header>
+    </section>
 
     <main class="max-w-5xl mx-auto px-6 py-16">
         
@@ -83,6 +89,116 @@
                 <p class="text-stone-600">Le site servait à la fois de forteresse et de lieu de sépulture sacrée pour les rois.</p>
             </div>
         </section>
+
+      {# Les Rois et Reines #}
+        <section id="rois-reines" class="py-20 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-6">
+
+                <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">
+                    Les Rois et Reines du Rova de Manjakamiadana
+                </h2>
+
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-16">
+                    Le palais de Manjakamiadana, situé au sommet du Rova d’Antananarivo,
+                    fut la résidence principale des souverains du royaume merina.
+                    Plusieurs rois et reines y ont gouverné Madagascar et marqué
+                    l’histoire politique et culturelle du pays.
+                </p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Andrianampoinimerina -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                       <img src="{{ asset('images/Andrianampoinimerina.jpg') }}"
+                            class="h-60 w-full object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800">Andrianampoinimerina</h3>
+                            <p class="text-green-700 font-semibold">Règne : 1787 – 1810</p>
+                            <p class="text-gray-600 mt-3">
+                                Grand roi unificateur du royaume Merina, il établit les bases
+                                de l’unification de Madagascar et fit d’Antananarivo
+                                le centre politique du royaume.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Radama I -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                        <img src="{{ asset('images/Radama_I.jpg') }}" class="h-60 w-full object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800">Radama I</h3>
+                            <p class="text-green-700 font-semibold">Règne : 1810 – 1828</p>
+                            <p class="text-gray-600 mt-3">
+                                Fils d’Andrianampoinimerina, il poursuivit l’unification
+                                de Madagascar et développa les relations avec l’Europe,
+                                notamment avec le Royaume-Uni.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Ranavalona I -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                        <img src="{{ asset('images/Ranavalona_I.jpg') }}"
+                            class="h-60 w-full object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800">Ranavalona I</h3>
+                            <p class="text-green-700 font-semibold">Règne : 1828 – 1861</p>
+                            <p class="text-gray-600 mt-3">
+                                Reine puissante du royaume Merina, elle défendit
+                                l’indépendance du pays face aux influences étrangères
+                                et gouverna pendant plus de trente ans.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Radama II -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                        <img src="{{ asset('images/Radama_II.jpg') }}"
+                            class="h-60 w-full object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800">Radama II</h3>
+                            <p class="text-green-700 font-semibold">Règne : 1861 – 1863</p>
+                            <p class="text-gray-600 mt-3">
+                                Roi réformateur qui tenta d’ouvrir Madagascar
+                                aux influences européennes et de moderniser
+                                l’administration du royaume.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Ranavalona II -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                        <img src="{{ asset('images/Ranavalona_II.jpg') }}"
+                            class="h-60 w-full object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800">Ranavalona II</h3>
+                            <p class="text-green-700 font-semibold">Règne : 1868 – 1883</p>
+                            <p class="text-gray-600 mt-3">
+                                Elle fit du christianisme la religion officielle
+                                du royaume et encouragea la transformation
+                                du palais Manjakamiadana.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Ranavalona III -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                        <img src="{{ asset('images/Ranavalona_III.jpg') }}"
+                            class="h-60 w-full object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800">Ranavalona III</h3>
+                            <p class="text-green-700 font-semibold">Règne : 1883 – 1897</p>
+                            <p class="text-gray-600 mt-3">
+                                Dernière reine de Madagascar. Son règne se termina
+                                avec la colonisation française et l’exil de la monarchie.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            </section>
 
         <!-- L'Âge d'Or -->
         <section id="age-dor" class="mb-24 bg-white p-8 rounded-2xl shadow-sm border border-stone-100 fade-in">
@@ -122,13 +238,51 @@
 
     </main>
 
-    <footer class="bg-stone-900 text-stone-400 py-12 text-center">
-        <p>© 2024 - Histoire du Rova d'Antananarivo</p>
-        <div class="mt-4 flex justify-center space-x-4">
-            <i class="fab fa-facebook hover:text-white cursor-pointer transition"></i>
-            <i class="fab fa-instagram hover:text-white cursor-pointer transition"></i>
+    {# FOOTER #}
+<footer id="contacts" class="bg-[#4b0000] text-white py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-8 md:gap-10">
+            <div>
+                <h3 class="text-green-400 font-bold text-lg mb-4">
+                    Navigation rapide
+                </h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-green-400 transition">Accueil</a></li>
+                    <li><a href="#apropos" class="hover:text-green-400 transition">À propos</a></li>
+                    <li><a href="#actualites" class="hover:text-green-400 transition">Actualités</a></li>
+                    <li><a href="#evenements" class="hover:text-green-400 transition">Événements</a></li>
+                    <li><a href="#contacts" class="hover:text-green-400 transition">Contacts</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-blue-400 font-bold text-lg mb-4">
+                    Informations de contact
+                </h3>
+                <p class="mb-2">Antananarivo, Madagascar</p>
+                <p class="mb-2">+261 34 00 000 00</p>
+                <span>📧</span>
+                <a href="mailto:contact.ormada@gmail.com" class="hover:text-green-600 transition">
+                   nambixjenny@gmail.com
+                </a>
+            </div>
+            
+            <div>
+                <h3 class="font-bold text-lg mb-4">
+                    Réseaux sociaux
+                </h3>
+                <button onclick="openModal()"
+                        class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg transition duration-300 font-semibold">
+                    Contactez-nous
+                </button>
+            </div>
         </div>
-    </footer>
+        
+        <p class="text-center mt-10 pt-6 border-t border-red-800 text-sm">
+            © 2026 ORMada. Tous droits réservés
+        </p>
+    </div>
+</footer>
 
     <script>
     // Gestion du menu mobile

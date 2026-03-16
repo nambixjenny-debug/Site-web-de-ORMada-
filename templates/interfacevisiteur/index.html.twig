@@ -86,24 +86,25 @@
 <main>
 
 {# SECTION HERO #}
-<section class="min-h-screen bg-cover bg-center flex items-center justify-center text-center px-4 mt-16"
-         style="background-image:url('images/fondRova.jpg')">
-    <div class="hero-overlay p-6 md:p-10 rounded-lg text-white w-full max-w-2xl fade-in">
+<section class="min-h-screen  bg-center flex items-center justify-center text-center px-4 mt-16" style="background-image:url('images/fondRova.jpg')">
+    <div class="p-6 md:p-10 rounded-lg text-white w-full max-w-2xl fade-in">
         <p class="text-sm md:text-base mb-3 opacity-90">
             Pour la gestion et le développement durable du patrimoine de Madagascar
         </p>
         <h1 class="text-3xl md:text-5xl font-bold mb-6">
-            Royan' Madagasikara
+            Rovan' Madagasikara
         </h1>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a href="{{ path('app_histoire_du_rova') }}"
-                class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200 text-white font-semibold">
+                class="px-6 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition">
                 <span class="text-lg">🏰</span>
                 <span class="font-medium">Histoire du Rova</span>
 
             </a>
-            <button class="bg-white text-black px-6 py-3 rounded-lg hover:bg-gray-200 transition duration-300 font-semibold">
-                En savoir plus
+     
+            <button onclick="openModal()"
+                    class="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg transition duration-300 font-semibold">
+                    Contactez-nous
             </button>
         </div>
     </div>
@@ -215,7 +216,72 @@
                     Ce geste est considéré comme irrespectueux. Respecter les traditions 
                     culturelles et suivre les indications locales.
                 </p>
+                <button onclick="openFadyModal()"
+                    class="bg-red-700 hover:bg-bleu-800 text-white px-6 py-3 rounded-lg shadow-lg transition mt-4">
+                    En savoir plus...
+                </button>
             </div>
+
+            {# Modal qui affiche tous les fady liés au Rova de Manjakamiadana #}
+
+        <div id="fadyModal"
+            class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
+
+            <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full p-8 relative">
+
+                <button onclick="closeFadyModal()" class="absolute top-3 right-3 text-gray-600 hover:text-red-600 text-xl">
+                     ✖
+                </button>
+
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+                    Les Fady du Rova d'Antananarivo
+                </h2>
+
+                <div class="space-y-4 text-gray-700">
+
+                    <div class="flex gap-3">
+                    <span class="text-red-600 text-xl">🚫</span>
+                    <p>Ne pas pointer du doigt les tombes royales ou les palais.</p>
+                </div>
+
+                <div class="flex gap-3">
+                    <span class="text-red-600 text-xl">📷</span>
+                    <p>Les photos peuvent être interdites dans certaines zones sacrées.</p>
+                </div>
+
+                <div class="flex gap-3">
+                    <span class="text-red-600 text-xl">🕊</span>
+                    <p>Respecter les tombes des rois et reines.</p>
+                </div>
+
+                <div class="flex gap-3">
+                    <span class="text-red-600 text-xl">🙏</span>
+                    <p>Adopter un comportement respectueux dans tout le site.</p>
+                </div>
+
+                <div class="flex gap-3">
+                    <span class="text-red-600 text-xl">🍽</span>
+                    <p>Certains aliments peuvent être interdits selon les traditions.</p>
+                </div>
+
+                <div class="flex gap-3">
+                    <span class="text-red-600 text-xl">🤫</span>
+                    <p>Éviter de faire du bruit ou de perturber les lieux sacrés.</p>
+                </div>
+
+                </div>
+
+                <div class="text-center mt-8">
+                    <button onclick="closeFadyModal()"
+                        class="bg-gray-800 text-white px-5 py-2 rounded-lg hover:bg-gray-900">
+                        Fermer
+                    </button>
+                </div>
+
+                </div>
+            </div>
+
+{#      Inforamtion sur les tarifs d'entrée du Rova de Manjakamiadana #}
             
             <div class="bg-white p-6 rounded-xl shadow-md">
                 <h3 class="text-blue-600 font-bold text-xl mb-4">
@@ -432,6 +498,21 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+
+{# affichage du modal pour Fady #}
+function openFadyModal(){
+    document.getElementById("fadyModal").classList.remove("hidden");
+    document.getElementById("fadyModal").classList.add("flex");
+    }
+
+function closeFadyModal(){
+    document.getElementById("fadyModal").classList.remove("flex");
+    document.getElementById("fadyModal").classList.add("hidden");
+}
+
+
+
 </script>
 
 </body>
