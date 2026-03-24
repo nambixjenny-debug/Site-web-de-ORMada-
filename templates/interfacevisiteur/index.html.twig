@@ -111,34 +111,99 @@
 </section>
 
 {# SECTION ACTUALITÉS #}
-<section id="actualites" class="py-16 md:py-20 bg-gray-100">
+<section id="actualites" class="py-16 bg-gray-100">
     <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-bold text-center mb-12 md:mb-16">
+        
+        <h2 class="text-3xl font-bold text-center mb-12">
             Actualités
         </h2>
-        
-        <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div class="fade-in">
-                <h3 class="font-bold text-xl md:text-2xl mb-3">
-                    Titres de l'actualité ou de publication
-                </h3>
-                <h4 class="text-lg mb-4 font-semibold text-gray-700">
-                    Sous-titre de publications ou annonces
-                </h4>
-                <p class="text-gray-600 mb-6">
-                    TSAPIKY FESTIVAL — 27 au 28 Février à Toliary.<br>
-                    Hetisika manandratra ny kolontsaina malagasy sy ny mozika Tsapiky.
-                </p>
-                <button class="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition duration-300">
-                    Plus de détails
-                </button>
+
+        <!-- CARROUSEL -->
+        <div class="relative overflow-hidden">
+
+            <!-- Slides -->
+            <div id="carousel" class="flex transition-transform duration-500">
+
+                <!-- ACTU 1 -->
+                <div class="min-w-full grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-bold mb-3">Tsapiky Festival</h3>
+                        <p class="text-gray-600 mb-4">
+                            Festival culturel à Toliara mettant en valeur la musique Tsapiky.
+                        </p>
+                        <button class="bg-black text-white px-4 py-2 rounded-lg">Voir plus...</button>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800"
+                         class="rounded-xl shadow-lg h-64 object-cover w-full">
+                </div>
+
+                <!-- ACTU 2 -->
+                <div class="min-w-full grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-bold mb-3">Rova d’Antananarivo</h3>
+                        <p class="text-gray-600 mb-4">
+                            Réhabilitation du Rova et ouverture au public.
+                        </p>
+                        <button class="bg-black text-white px-4 py-2 rounded-lg">Voir plus...</button>
+                    </div>
+                    <img src="images/fondRova.jpg"
+                         class="rounded-xl shadow-lg h-64 object-cover w-full">
+                </div>
+
+                <!-- ACTU 3 -->
+                <div class="min-w-full grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-bold mb-3">Festival Donia</h3>
+                        <p class="text-gray-600 mb-4">
+                            Grand festival à Nosy Be avec artistes internationaux.
+                        </p>
+                        <button class="bg-black text-white px-4 py-2 rounded-lg">Voir plus...</button>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800"
+                         class="rounded-xl shadow-lg h-64 object-cover w-full">
+                </div>
+
+                <!-- ACTU 4 -->
+                <div class="min-w-full grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-bold mb-3">Artisanat Malagasy</h3>
+                        <p class="text-gray-600 mb-4">
+                            Mise en valeur des artisans locaux et produits traditionnels.
+                        </p>
+                        <button class="bg-black text-white px-4 py-2 rounded-lg">Voir plus...</button>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800"
+                         class="rounded-xl shadow-lg h-64 object-cover w-full">
+                </div>
+
             </div>
-            
-            <div class="fade-in">
-                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format"
-                     alt="Festival culturel à Madagascar"
-                     class="rounded-xl shadow-lg w-full h-64 md:h-80 object-cover">
+
+      
+            <div class="flex flex-col items-center mt-6 space-y-4">
+
+                <!-- Boutons -->
+                <div class="flex gap-4">
+                    <button onclick="prevSlide()" 
+                        class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-full">
+                        <
+                    </button>
+
+                    <button onclick="nextSlide()" 
+                        class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-full">
+                        >
+                    </button>
+                </div>
+
+                <!-- Dots -->
+                <div id="dots" class="flex gap-2">
+                    <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer"></span>
+                    <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer"></span>
+                    <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer"></span>
+                    <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer"></span>
+                </div>
+
             </div>
+
         </div>
     </div>
 </section>
@@ -284,24 +349,82 @@
 {#      Inforamtion sur les tarifs d'entrée du Rova de Manjakamiadana #}
             
             <div class="bg-white p-6 rounded-xl shadow-md">
-                <h3 class="text-blue-600 font-bold text-xl mb-4">
-                    Tarifs
+                <h3 class="text-red-600 font-bold text-xl mb-4">
+                    Tarifs d'entrée du Rova de Manjakamiadana
                 </h3>
-                <div class="text-gray-700 space-y-3">
-                    <div>
-                        <p class="font-semibold">🇲🇬 Malagasy et Résident :</p>
-                        <p class="ml-4">• Moins de 15 ans : 5 000 Ar</p>
-                        <p class="ml-4">• Plus de 15 ans : 10 000 Ar</p>
+                <p class="text-gray-700 leading-relaxed">
+                    Les tarifs d'entrée varient en fonction de la nationalité, de l'âge et du type de visite (complète ou partielle). 
+                    Des réductions sont disponibles pour les groupes de 5 personnes ou plus.
+                </p>
+            
+
+                <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
+                    🎟️ Tarifs de visite
+                </h2>
+
+                <div class="space-y-6 text-gray-700">
+
+                    <!-- VISITE COMPLETE -->
+                    <div class="bg-gray-50 rounded-xl p-5 border border-gray-200">
+                        <h3 class="text-lg font-bold text-green-700 mb-4">
+                            🏚 VISITE COMPLÈTE
+                        </h3>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+
+                            <!-- Malagasy -->
+                            <div class="bg-white p-4 rounded-lg shadow">
+                                <p class="font-semibold text-gray-800 mb-2">🇲🇬 Malagasy et Résident</p>
+                                <ul class="space-y-1 text-sm">
+                                    <li>• -15 ans : <span class="font-semibold">5 000 Ar</span> <span class="text-gray-500">(3 000 Ar si ≥ 5 pers)</span></li>
+                                    <li>• +15 ans : <span class="font-semibold">10 000 Ar</span> <span class="text-gray-500">(7 000 Ar si ≥ 5 pers)</span></li>
+                                </ul>
+                            </div>
+
+                            <!-- Etranger -->
+                            <div class="bg-white p-4 rounded-lg shadow">
+                                <p class="font-semibold text-gray-800 mb-2">🌍 Étranger non résident</p>
+                                <ul class="space-y-1 text-sm">
+                                    <li>• -15 ans : <span class="font-semibold">20 000 Ar</span> <span class="text-gray-500">(15 000 Ar si ≥ 5 pers)</span></li>
+                                    <li>• +15 ans : <span class="font-semibold">40 000 Ar</span> <span class="text-gray-500">(30 000 Ar si ≥ 5 pers)</span></li>
+                                </ul>
+                            </div>
+
+                        </div>
                     </div>
-                    <div>
-                        <p class="font-semibold">🌍 Etranger non résident :</p>
-                        <p class="ml-4">• Moins de 15 ans : 20 000 Ar</p>
-                        <p class="ml-4">• Plus de 15 ans : 40 000 Ar</p>
+
+                    <!-- VISITE PARTIELLE -->
+                    <div class="bg-gray-50 rounded-xl p-5 border border-gray-200">
+                        <h3 class="text-lg font-bold text-emerald-700 mb-4">
+                            👑 VISITE PARTIELLE (Palais Manjakamiadana)
+                        </h3>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+
+                            <!-- Malagasy -->
+                            <div class="bg-white p-4 rounded-lg shadow">
+                                <p class="font-semibold text-gray-800 mb-2">🇲🇬 Malagasy et Résident</p>
+                                <ul class="space-y-1 text-sm">
+                                    <li>• -15 ans : <span class="font-semibold">2 000 Ar</span> <span class="text-gray-500">(1 000 Ar si ≥ 5 pers)</span></li>
+                                    <li>• +15 ans : <span class="font-semibold">5 000 Ar</span> <span class="text-gray-500">(3 500 Ar si ≥ 5 pers)</span></li>
+                                </ul>
+                            </div>
+
+                            <!-- Etranger -->
+                            <div class="bg-white p-4 rounded-lg shadow">
+                                <p class="font-semibold text-gray-800 mb-2">🌍 Étranger non résident</p>
+                                <ul class="space-y-1 text-sm">
+                                    <li>• -15 ans : <span class="font-semibold">10 000 Ar</span> <span class="text-gray-500">(7 000 Ar si ≥ 5 pers)</span></li>
+                                    <li>• +15 ans : <span class="font-semibold">20 000 Ar</span> <span class="text-gray-500">(15 000 Ar si ≥ 5 pers)</span></li>
+                                </ul>
+                            </div>
+
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 {# SECTION À PROPOS #}
@@ -457,6 +580,16 @@ function closeModal() {
     document.body.style.overflow = 'auto'; // Restaure le scroll
 }
 
+// Fermer la modal avec la touche Echap
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('contactModal');
+        if (!modal.classList.contains('hidden')) {
+            closeModal();
+        }
+    }
+});
+
 // Gestion du menu mobile
 function toggleMobileMenu() {
     const menu = document.getElementById('mobileMenu');
@@ -475,15 +608,53 @@ function handleSubmit(e) {
     e.target.reset();
 }
 
-// Fermer la modal avec la touche Echap
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        const modal = document.getElementById('contactModal');
-        if (!modal.classList.contains('hidden')) {
-            closeModal();
+{# Gestion du carrousel #}
+
+let currentSlide = 0;
+
+function showSlide (){
+    const carousel = document.getElementById('carousel');
+    carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+    updateDots();
+}
+
+function nextSlide(){
+    const totalSlides = document.querySelectorAll('#carousel > div').length;
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide();
+}
+
+function prevSlide(){
+    const totalSlides = document.querySelectorAll('#carousel > div').length;
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide();
+}
+
+{# clic sur les dots pour aller à une slide spécifique #}
+
+function updateDots(){
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, i) => {
+        dot.classList.remove('bg-red-800');
+        dot.classList.add('bg-gray-400');
+
+        if (i === currentSlide){
+            dot.classList.remove('bg-gray-400');
+            dot.classList.add('bg-red-800');
+
         }
-    }
+    })
+}
+
+document.querySelectorAll(".dot").forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+        currentSlide = i;
+        showSlide();
+    });
 });
+showSlide();
+
+
 
 // Smooth scroll pour les ancres
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
