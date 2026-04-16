@@ -250,9 +250,13 @@ style="background-image:url('{{ asset('images/fondRova.jpg') }}')">
 
         <!-- MODAL Image de Rova aujourd'hui   -->
         <div id="modal"
-            class="fixed inset-0 bg-black/70 hidden justify-center items-center z-50">
+            class="fixed inset-0 bg-black/70 hidden justify-center items-center z-50 transition-opacity duration-300 opacity-0">
 
-            <div class="bg-white rounded-2xl max-w-4xl w-[90%] p-6 relative">
+            <div id="modalContent"
+                class="bg-white rounded-2xl max-w-4xl w-[90%] p-6 relative
+                    transform scale-95 opacity-0 transition-all duration-300">
+
+            
 
                 <!-- CLOSE BUTTON -->
                 <button id="closeModal"
@@ -478,15 +482,21 @@ style="background-image:url('{{ asset('images/fondRova.jpg') }}')">
             modalDescription.textContent = rovaData[currentIndex].description;
         }
 
-
         openModal.addEventListener("click", ()=>{
+
             modal.classList.remove("hidden");
             modal.classList.add("flex");
+
+            setTimeout(() => {
+                modal.classList.remove("opacity-0");
+
+                modalContent.classList.remove("scale-95", "opacity-0");
+                modalContent.classList.add("scale-100", "opacity-100");
+            }, 10);
 
             updateModal();
 
         });
-
         closeModal.addEventListener("click", ()=>{
 
             modal.classList.add("hidden");

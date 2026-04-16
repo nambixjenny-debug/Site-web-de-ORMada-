@@ -3,9 +3,38 @@
 {% block title %}New Media{% endblock %}
 
 {% block body %}
-    <h1>Create new Media</h1>
 
-    {{ include('media/_form.html.twig') }}
+<div class="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-10">
 
-    <a href="{{ path('app_media_index') }}">back to list</a>
+    <div class="w-full max-w-3xl bg-white rounded-2xl shadow-xl p-8">
+
+        <!-- Header -->
+        <div class="mb-8 text-center">
+            <h1 class="text-3xl font-bold text-gray-800">
+                Ajouter un nouveau média
+            </h1>
+            <p class="text-gray-500 mt-2">
+                Remplissez les informations du fichier à enregistrer
+            </p>
+        </div>
+
+        <!-- Form -->
+        <div class="mb-8">
+            {{ include('media/_form.html.twig') }}
+        </div>
+
+        <!-- Actions -->
+        <div class="flex justify-between items-center pt-6 border-t border-gray-200">
+
+            <a href="{{ path('app_media_index') }}"
+               class="text-gray-600 hover:text-gray-900 transition font-medium">
+                ← Retour à la liste
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
 {% endblock %}
