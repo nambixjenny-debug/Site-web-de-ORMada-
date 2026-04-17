@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
 #[Route('/media')]
 final class MediaController extends AbstractController
 {
@@ -22,25 +25,85 @@ final class MediaController extends AbstractController
         ]);
     }
 
+    // #[Route('/new', name: 'app_media_new', methods: ['GET', 'POST'])]
+    // public function new(Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $medium = new Media();
+    //     $form = $this->createForm(MediaType::class, $medium);
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager->persist($medium);
+    //         $entityManager->flush();
+
+    //         return $this->redirectToRoute('app_media_index', [], Response::HTTP_SEE_OTHER);
+    //     }
+
+    //     return $this->render('media/new.html.twig', [
+    //         'medium' => $medium,
+    //         'form' => $form,
+    //     ]);
+    // }
     #[Route('/new', name: 'app_media_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $medium = new Media();
-        $form = $this->createForm(MediaType::class, $medium);
-        $form->handleRequest($request);
+        public function new(
+            Request $request,
+            EntityManagerInterface $entityManager,
+            SluggerInterface $slugger
+        ): Response
+        {
+            $medium = new Media();
+            $form = $this->createForm(MediaType::class, $medium);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($medium);
-            $entityManager->flush();
+            if ($form->isSubmitted() && $form->isValid()) {
 
-            return $this->redirectToRoute('app_media_index', [], Response::HTTP_SEE_OTHER);
+                $imageFile = $form->get('imageFile')->getData();
+
+                if ($imageFile) {
+
+                    // ✅ Vérifier si fichier valide
+                    if (!$imageFile->isValid()) {
+                        $this->addFlash('error', 'Erreur lors de l\'upload du fichier.');
+                        return $this->redirectToRoute('app_media_new');
+                    }
+
+                    // Nom sécurisé
+                    $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+
+                    try {
+                        $imageFile->move(
+                            $this->getParameter('uploads_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+                        $this->addFlash('error', 'Impossible d\'enregistrer le fichier.');
+                        return $this->redirectToRoute('app_media_new');
+                    }
+
+                    // Enregistrer en base
+                    $medium->setNomdufichier($newFilename);
+                    $medium->setTypedufichier($imageFile->getClientMimeType());
+                    $medium->setChemindufichier('/uploads/' . $newFilename);
+                }
+
+                $medium->setUploadat(new \DateTime());
+
+                $entityManager->persist($medium);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Image uploadée avec succès !');
+
+                return $this->redirectToRoute('app_media_index');
+            }
+
+            return $this->render('media/new.html.twig', [
+                'form' => $form->createView(),
+            ]);
         }
 
-        return $this->render('media/new.html.twig', [
-            'medium' => $medium,
-            'form' => $form,
-        ]);
-    }
+
 
     #[Route('/{id}', name: 'app_media_show', methods: ['GET'])]
     public function show(Media $medium): Response

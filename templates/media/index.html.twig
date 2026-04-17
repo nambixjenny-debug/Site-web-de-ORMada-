@@ -27,6 +27,7 @@
             <thead class="bg-gradient-to-r from-green-800 via-emerald-700 to-teal-700 text-white">
                 <tr>
                     <th class="px-6 py-4 text-left text-sm font-semibold ">ID</th>
+                    <th class="px-6 py-4 text-left text-sm font-semibold ">IMAGE</th>
                     <th class="px-6 py-4 text-left text-sm font-semibold ">Nom du fichier</th>
                     <th class="px-6 py-4 text-left text-sm font-semibold ">Type</th>
                     <th class="px-6 py-4 text-left text-sm font-semibold ">Chemin</th>
@@ -43,7 +44,11 @@
                     <td class="px-6 py-4 text-gray-700">
                         {{ medium.id }}
                     </td>
-
+                    <td>
+                        <img src="{{ medium.chemindufichier }}"class="h-20 w-20 object-cover rounded">
+                        
+                    </td>
+            
                     <td class="px-6 py-4 font-medium text-gray-800">
                         {{ medium.nomdufichier }}
                     </td>
