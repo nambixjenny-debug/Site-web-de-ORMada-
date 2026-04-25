@@ -85,6 +85,45 @@
 {# MAIN CONTENT #}
 <main>
 
+{# Affichage des messages flash #}
+{% for type, messages in app.flashes %}
+    {% if type == 'success' %}
+    <div class="bg-green-50 border-l-4 border-green-600 p-4 m-4 rounded" role="alert">
+        <div class="flex">
+            <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="ml-3">
+                <p class="text-sm font-medium text-green-800">
+                    {% for message in messages %}
+                        {{ message }}{% if not loop.last %}<br>{% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+    </div>
+    {% elseif type == 'error' %}
+    <div class="bg-red-50 border-l-4 border-red-600 p-4 m-4 rounded" role="alert">
+        <div class="flex">
+            <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="ml-3">
+                <p class="text-sm font-medium text-red-800">
+                    {% for message in messages %}
+                        {{ message }}{% if not loop.last %}<br>{% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}
+
 {# SECTION HERO #}
 <section class="min-h-screen  bg-center flex items-center justify-center text-center px-4 mt-16" style="background-image:url('images/fondRova.jpg')">
     <div class="p-6 md:p-10 rounded-lg text-white w-full max-w-2xl fade-in">
@@ -535,52 +574,68 @@ En plus des spectacles, des stands d’artisanat et de gastronomie locale ont pe
      class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4"
      onclick="if(event.target===this) closeModal()">
     
-    <div class="bg-white rounded-xl p-6 md:p-8 w-full max-w-md">
+    <div class="bg-white rounded-xl p-6 md:p-8 w-full max-w-md max-h-96 overflow-y-auto">
         <h2 class="text-2xl text-center font-bold mb-6 text-gray-800">
             Contactez-nous
         </h2>
         
-        <form onsubmit="handleSubmit(event)" class="space-y-4">
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Nom complet</label>
-                <input type="text" required 
-                       class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                       placeholder="Votre nom">
-            </div>
+        <!-- Formulaire AJAX pour éviter les problèmes CSRF -->
+        <form id="contactFormAjax" class="space-y-6">
             
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <input type="email" required 
-                       class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                       placeholder="votre@email.com">
+            <!-- Champ NOM -->
+            <div class="form-group">
+                <label for="contact_nom" class="block text-sm font-semibold text-gray-700 mb-2">Nom</label>
+                <input type="text" id="contact_nom" name="nom" placeholder="Votre nom" 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200" 
+                       required>
+                <div class="text-red-500 text-xs mt-1 error-nom"></div>
             </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Titre du message</label>
-                <input type="text" required 
-                       class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                       placeholder="Titre de votre message">
+
+            <!-- Champ EMAIL -->
+            <div class="form-group">
+                <label for="contact_email" class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                <input type="email" id="contact_email" name="email" placeholder="votre.email@example.com" 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200" 
+                       required>
+                <div class="text-red-500 text-xs mt-1 error-email"></div>
             </div>
-            
-            
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                <textarea required rows="4"
-                          class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                          placeholder="Votre message..."></textarea>
+
+            <!-- Champ TITRE -->
+            <div class="form-group">
+                <label for="contact_titre" class="block text-sm font-semibold text-gray-700 mb-2">Titre/Sujet</label>
+                <input type="text" id="contact_titre" name="titre" placeholder="Sujet de votre message" 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200" 
+                       required>
+                <div class="text-red-500 text-xs mt-1 error-titre"></div>
             </div>
-            
-            <div class="flex gap-3 pt-2">
-                <button type="submit" 
-                        class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-semibold flex-1">
+
+            <!-- Champ DESCRIPTION -->
+            <div class="form-group">
+                <label for="contact_description" class="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+                <textarea id="contact_description" name="description" placeholder="Votre message" rows="4"
+                          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200" 
+                          required></textarea>
+                <div class="text-red-500 text-xs mt-1 error-description"></div>
+            </div>
+
+            <!-- Erreur générale -->
+            <div id="contact_error" class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded"></div>
+
+            <!-- BOUTONS -->
+            <div class="flex justify-between pt-6 border-t gap-3">
+                <button type="button" onclick="closeModal()"
+                   class="text-gray-600 hover:text-gray-900 text-sm px-5 py-2 rounded-md border border-gray-300 hover:bg-gray-100 transition">
+                    ← Annuler
+                </button>
+
+                <button type="submit" id="submitBtn"
+                    class="bg-green-600 hover:bg-green-700 text-white text-sm px-5 py-2 rounded-md transition">
                     Envoyer
                 </button>
-                <button type="button"
-                        onclick="closeModal()"
-                        class="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition font-semibold">
-                    Annuler
-                </button>
             </div>
+
         </form>
+            
     </div>
 </div>
 
@@ -592,13 +647,102 @@ function openModal() {
     const modal = document.getElementById('contactModal');
     modal.classList.remove('hidden');
     modal.classList.add('flex');
-    document.body.style.overflow = 'hidden'; // Empêche le scroll
+    document.body.style.overflow = 'hidden';
+    resetContactForm();
 }
 
 function closeModal() {
     const modal = document.getElementById('contactModal');
     modal.classList.add('hidden');
-    document.body.style.overflow = 'auto'; // Restaure le scroll
+    document.body.style.overflow = 'auto';
+}
+
+function resetContactForm() {
+    const form = document.getElementById('contactFormAjax');
+    if (form) {
+        form.reset();
+    }
+    // Réinitialiser les messages d'erreur
+    document.getElementById('contact_error').classList.add('hidden');
+    document.querySelectorAll('[class^="error-"]').forEach(el => el.textContent = '');
+}
+
+// Soumission du formulaire de contact en AJAX
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactFormAjax');
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Envoi en cours...';
+            
+            // Récupérer les données du formulaire
+            const formData = {
+                nom: document.getElementById('contact_nom').value,
+                email: document.getElementById('contact_email').value,
+                titre: document.getElementById('contact_titre').value,
+                description: document.getElementById('contact_description').value
+            };
+
+            try {
+                const response = await fetch('{{ path("api_contact_submit") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Afficher le message de succès
+                    showSuccessMessage('Votre message a bien été envoyé !');
+                    resetContactForm();
+                    setTimeout(() => closeModal(), 1500);
+                } else {
+                    showErrorMessage(result.error || 'Erreur lors de l\'envoi');
+                }
+            } catch (error) {
+                showErrorMessage('Erreur réseau: ' + error.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+    }
+});
+
+function showSuccessMessage(message) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'fixed top-4 right-4 bg-green-50 border-l-4 border-green-600 p-4 rounded shadow-lg z-50 max-w-sm';
+    alertDiv.innerHTML = `
+        <div class="flex">
+            <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="ml-3">
+                <p class="text-sm font-medium text-green-800">${message}</p>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(alertDiv);
+    
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 3000);
+}
+
+function showErrorMessage(message) {
+    const errorDiv = document.getElementById('contact_error');
+    errorDiv.textContent = message;
+    errorDiv.classList.remove('hidden');
 }
 
 // Fermer la modal avec la touche Echap
@@ -615,18 +759,6 @@ document.addEventListener('keydown', function(e) {
 function toggleMobileMenu() {
     const menu = document.getElementById('mobileMenu');
     menu.classList.toggle('hidden');
-}
-
-// Gestion de la soumission du formulaire
-function handleSubmit(e) {
-    e.preventDefault();
-    
-    // Simuler l'envoi du formulaire
-    alert('Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.');
-    closeModal();
-    
-    // Réinitialiser le formulaire
-    e.target.reset();
 }
 
 {# Gestion du carrousel #}

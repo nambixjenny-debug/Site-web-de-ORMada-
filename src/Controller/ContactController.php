@@ -22,27 +22,27 @@ final class ContactController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_contact_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $contact = new Contact();
-        $contact->setCreerle(new \DateTime()); // auto date
-        $contact->setDejalu(false); // par défaut
-        $form = $this->createForm(ContactType::class, $contact);
-        $form->handleRequest($request);
+    // #[Route('/new', name: 'app_contact_new', methods: ['GET', 'POST'])]
+    // public function new(Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $contact = new Contact();
+    //     $contact->setCreerle(new \DateTime()); // auto date
+    //     $contact->setDejalu(false); // par défaut
+    //     $form = $this->createForm(ContactType::class, $contact);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($contact);
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager->persist($contact);
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('app_interfacevisiteur', [], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('app_interfacevisiteur', [], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->render('contact/new.html.twig', [
-            'contact' => $contact,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->render('contact/new.html.twig', [
+    //         'contact' => $contact,
+    //         'form' => $form,
+    //     ]);
+    // }
 
     #[Route('/{id}', name: 'app_contact_show', methods: ['GET'])]
     public function show(Contact $contact): Response

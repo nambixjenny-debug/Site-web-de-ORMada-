@@ -15,7 +15,10 @@
 
         <!-- Form Card -->
         <div class="bg-white rounded-xl shadow-lg p-8 border-l-4 border-blue-500 mb-8">
-            {{ include('contact/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+            {{ include('contact/_form.html.twig', {
+                'form': form,
+                'button_label': 'Mettre à jour'
+            }) }}
         </div>
 
         <!-- Additional Actions -->
