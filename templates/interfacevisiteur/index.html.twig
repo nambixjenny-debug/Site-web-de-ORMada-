@@ -548,8 +548,10 @@ En plus des spectacles, des stands d’artisanat et de gastronomie locale ont pe
                     Informations de contact
                 </h3>
                 <p class="mb-2">Antananarivo, Madagascar</p>
-                <p class="mb-2">+261 34 00 000 00</p>
-                <p class="mb-2">contact@ormada.mg</p>
+                {% for parametre in parametres %}
+                    
+                    <p class="mb-2">{{ parametre.valeur }}</p>
+                {% endfor %}
             </div>
             
             <div>
@@ -574,7 +576,7 @@ En plus des spectacles, des stands d’artisanat et de gastronomie locale ont pe
      class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4"
      onclick="if(event.target===this) closeModal()">
     
-    <div class="bg-white rounded-xl p-6 md:p-8 w-full max-w-md max-h-96 overflow-y-auto">
+    <div class="bg-white rounded-xl p-6 md:p-8 w-full max-w-md max-h-106 overflow-y-auto">
         <h2 class="text-2xl text-center font-bold mb-6 text-gray-800">
             Contactez-nous
         </h2>

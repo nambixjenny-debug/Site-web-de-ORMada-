@@ -10,12 +10,13 @@ use App\Form\ContactType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\ParametreRepository;
 
 
 final class InterfacevisiteurController extends AbstractController
 {
     #[Route('/interfacevisiteur', name: 'app_interfacevisiteur', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, ParametreRepository $parametreRepository): Response
     {
         $contact = new Contact();
         $contact->setCreerle(new \DateTime());
@@ -32,9 +33,13 @@ final class InterfacevisiteurController extends AbstractController
             return $this->redirectToRoute('app_interfacevisiteur', [], Response::HTTP_SEE_OTHER);
         }
 
+        //recuperer les donnees du parametre
+        $parametres = $parametreRepository->findAll();
+
         return $this->render('interfacevisiteur/index.html.twig', [
             'contact' => $contact,
             'form' => $form->createView(),
+            'parametres' => $parametres,
         ]);
     }
 
