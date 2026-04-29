@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Actualite;
 use App\Form\ActualiteType;
 use App\Repository\ActualiteRepository;
+use App\Entity\Media;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,23 +23,50 @@ final class ActualiteController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_actualite_new', methods: ['GET', 'POST'])]
+
+   #[Route('/new', name: 'app_actualite_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $actualite = new Actualite();
+
         $form = $this->createForm(ActualiteType::class, $actualite);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // récupérer plusieurs images
+            $images = $form->get('images')->getData();
+
+            foreach ($images as $image) {
+
+                $newFilename = uniqid().'.'.$image->guessExtension();
+
+                $image->move(
+                    $this->getParameter('uploads_directory'),
+                    $newFilename
+                );
+
+                $media = new Media();
+                $media->setNomdufichier($newFilename);
+                $media->setTypedufichier($image->getClientMimeType());
+                $media->setChemindufichier('/uploads/'.$newFilename);
+                $media->setUploadat(new \DateTime());
+
+                // liaison avec actualité
+                $media->setActualite($actualite);
+
+                $entityManager->persist($media);
+            }
+
             $entityManager->persist($actualite);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_actualite_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_actualite_index');
         }
 
         return $this->render('actualite/new.html.twig', [
             'actualite' => $actualite,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

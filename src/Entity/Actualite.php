@@ -5,6 +5,10 @@ namespace App\Entity;
 use App\Repository\ActualiteRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
+
 
 #[ORM\Entity(repositoryClass: ActualiteRepository::class)]
 class Actualite
@@ -25,6 +29,14 @@ class Actualite
 
     #[ORM\Column]
     private ?bool $dejapublier = null;
+
+    #[ORM\OneToMany(mappedBy: 'actualite', targetEntity: Media::class, cascade: ['persist'])]
+    private Collection $media;
+
+    public function __construct()
+    {
+        $this->media = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
