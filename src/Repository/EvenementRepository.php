@@ -16,6 +16,15 @@ class EvenementRepository extends ServiceEntityRepository
         parent::__construct($registry, Evenement::class);
     }
 
+    public function AfficherQuatreDerniersEvenements(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.datedudebut', 'DESC') // ou date événement
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Evenement[] Returns an array of Evenement objects
 //     */

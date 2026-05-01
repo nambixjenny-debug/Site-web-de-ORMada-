@@ -16,6 +16,11 @@ class ParametreRepository extends ServiceEntityRepository
         parent::__construct($registry, Parametre::class);
     }
 
+    public function getAll(): array
+    {
+        return $this->repo->findAll();
+    }
+
 //    /**
 //     * @return Parametre[] Returns an array of Parametre objects
 //     */

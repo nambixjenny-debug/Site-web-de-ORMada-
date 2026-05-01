@@ -6,18 +6,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\ActualiteRepository;
+use App\Repository\EvenementRepository;
+use App\Repository\ParametreRepository;
 
 final class PageAccueilController extends AbstractController
 {
     #[Route('/page/accueil', name: 'app_page_accueil')]
-    public function index(ActualiteRepository $actualiteRepository): Response
+    public function index(ActualiteRepository $actualiteRepository, EvenementRepository $evenementRepository, ParametreRepository $parametreRepository): Response
     {   
 
          $actualites = $actualiteRepository->AfficherQuatreDernieresActualites();
+         $evenements = $evenementRepository->AfficherQuatreDerniersEvenements();
+         $parametres = $parametreRepository->findAll();
        
         return $this->render('page_accueil/index.html.twig', [
             'controller_name' => 'PageAccueilController',
             'actualites' => $actualites,
+            'evenements' => $evenements,
+            'parametres' => $parametres,
         ]);
     }
 }
