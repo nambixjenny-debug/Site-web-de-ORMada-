@@ -16,6 +16,26 @@ class ActualiteRepository extends ServiceEntityRepository
         parent::__construct($registry, Actualite::class);
     }
 
+    // public function findLastFour(): array
+    // {
+    //     return $this->createQueryBuilder('a')
+    //         ->where('a.dejapublier = true')
+    //         ->orderBy('a.publierle', 'DESC')
+    //         ->setMaxResults(4)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+
+    public function AfficherQuatreDernieresActualites(): array
+    {
+        return $this->createQueryBuilder('actualite')
+                    ->where('actualite.dejapublier = true')
+                    ->orderBy('actualite.publierle', 'DESC')
+                    ->setMaxResults(4)
+                    ->getQuery()
+                    ->getResult();
+    }
+
 //    /**
 //     * @return Actualite[] Returns an array of Actualite objects
 //     */
