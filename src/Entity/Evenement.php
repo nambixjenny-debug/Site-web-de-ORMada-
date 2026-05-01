@@ -36,6 +36,12 @@ class Evenement
     {
         $this->media = new ArrayCollection();
     }
+    
+      public function getMedia(): Collection
+    {
+        return $this->media;
+    }
+
         
 
     public function getId(): ?int
