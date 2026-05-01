@@ -24,6 +24,7 @@
                     <thead class="bg-gradient-to-r from-green-600 via-emerald-500 to-emerald-400 text-white">
                         <tr>
                             <th class="px-6 py-4 text-left font-semibold">ID</th>
+                            <th class="px-6 py-4 text-left font-semibold">images</th>
                             <th class="px-6 py-4 text-left font-semibold">Titre</th>
                             <th class="px-6 py-4 text-left font-semibold">Contenu</th>
                             <th class="px-6 py-4 text-left font-semibold">Date</th>
@@ -35,6 +36,14 @@
                     {% for actualite in actualites %}
                         <tr class="hover:bg-green-50 transition-colors">
                             <td class="px-6 py-4 font-semibold text-gray-900">#{{ actualite.id }}</td>
+                            <td class="px-2 py-2">
+                                {% set image = actualite.media|first %}
+                                {% if image %}
+                                    <img src="{{ asset(image.chemindufichier) }}" alt="{{ actualite.titre }}" class="w-full h-28 object-cover rounded-lg">
+                                {% else %}
+                                    <img src="{{ asset('images/default.jpg') }}" alt="{{ actualite.titre }}" class="w-full h-28 object-cover rounded-lg">
+                                {% endif %}
+                            </td>
                             <td class="px-6 py-4"><span class="font-semibold text-gray-900">{{ actualite.titre }}</span></td>
                             <td class="px-6 py-4 text-gray-600 max-w-xs truncate">{{ actualite.contenu }}</td>
                             <td class="px-6 py-4 text-gray-700">{{ actualite.publierle ? actualite.publierle|date('d/m/Y') : 'N/A' }}</td>

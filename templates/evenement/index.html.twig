@@ -24,6 +24,7 @@
                     <thead class="bg-gradient-to-r from-green-800 via-emerald-700 to-teal-700 text-white">
                         <tr>
                             <th class="px-6 py-4 text-left font-semibold">ID</th>
+                            <th class="px-6 py-4 text-left font-semibold">images</th>
                             <th class="px-6 py-4 text-left font-semibold">Titre</th>
                             <th class="px-6 py-4 text-left font-semibold">Description</th>
                             <th class="px-6 py-4 text-left font-semibold">Début</th>
@@ -35,6 +36,14 @@
                     {% for evenement in evenements %}
                         <tr class="hover:bg-green-50 transition-colors">
                             <td class="px-6 py-4 font-semibold text-gray-900">#{{ evenement.id }}</td>
+                            <td class="px-2 py-2">
+                                {% set image = evenement.media|first %}
+                                {% if image %}
+                                    <img src="{{ asset(image.chemindufichier) }}" alt="{{ evenement.titre }}" class="w-full h-28 object-cover rounded-lg">
+                                {% else %}
+                                    <img src="{{ asset('images/default.jpg') }}" alt="{{ evenement.titre }}" class="w-full h-28 object-cover rounded-lg">
+                                {% endif %}
+                            </td>
                             <td class="px-6 py-4"><span class="font-semibold text-gray-900">{{ evenement.titre }}</span></td>
                             <td class="px-6 py-4 text-gray-600 max-w-xs truncate">{{ evenement.description }}</td>
                             <td class="px-6 py-4">
