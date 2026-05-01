@@ -48,6 +48,8 @@
                             <td class="px-6 py-4 flex gap-3">
                                 <a href="{{ path('app_actualite_show', {'id': actualite.id}) }}" class="text-green-600 hover:text-green-800 font-semibold hover:underline">👁️ Voir</a>
                                 <a href="{{ path('app_actualite_edit', {'id': actualite.id}) }}" class="text-blue-600 hover:text-blue-800 font-semibold hover:underline">✏️ Éditer</a>
+                                {{ include('actualite/_delete_form.html.twig') }}
+                                
                             </td>
                         </tr>
                     {% else %}

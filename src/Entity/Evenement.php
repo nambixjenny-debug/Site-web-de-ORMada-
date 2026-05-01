@@ -26,6 +26,8 @@ class Evenement
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTime $datedufin = null;
 
+    
+
     public function getId(): ?int
     {
         return $this->id;
