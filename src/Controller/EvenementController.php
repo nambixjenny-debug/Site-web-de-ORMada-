@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Entity\Media;
 
 #[Route('/evenement')]
 final class EvenementController extends AbstractController
@@ -30,6 +31,28 @@ final class EvenementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $images = $form->get('images')->getData();
+
+            foreach ($images as $imageFile) {
+
+                $newFilename = uniqid().'.'.$imageFile->guessExtension();
+
+                $imageFile->move(
+                    $this->getParameter('uploads_directory'),
+                    $newFilename
+                );
+
+                $media = new Media();
+                $media->setNomdufichier($newFilename);
+                $media->setTypedufichier($imageFile->getClientMimeType());
+                $media->setChemindufichier('/uploads/'.$newFilename);
+                $media->setUploadat(new \DateTime());
+
+                $media->setEvenement($evenement);
+
+                $entityManager->persist($media);
+            }
             $entityManager->persist($evenement);
             $entityManager->flush();
 

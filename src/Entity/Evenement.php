@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\EvenementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
@@ -25,8 +28,15 @@ class Evenement
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTime $datedufin = null;
-
     
+    #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: Media::class, cascade: ['persist', 'remove'])]
+    private Collection $media;
+
+    public function __construct()
+    {
+        $this->media = new ArrayCollection();
+    }
+        
 
     public function getId(): ?int
     {
