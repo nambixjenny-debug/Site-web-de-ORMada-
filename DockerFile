@@ -12,9 +12,14 @@ WORKDIR /var/www/html
 
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader --no-scripts
+# 🔥 Installer dépendances proprement (SANS casser Symfony)
+RUN composer install --no-dev --optimize-autoloader
 
-RUN chown -R www-data:www-data /var/www/html/var
+# 🔥 Créer structure Symfony obligatoire
+RUN mkdir -p var/cache var/log
+
+# 🔥 Permissions correctes
+RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
 
