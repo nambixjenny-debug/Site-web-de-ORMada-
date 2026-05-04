@@ -88,8 +88,12 @@ final class InterfacevisiteurController extends AbstractController
     }
 
     #[Route('/interfacevisiteur/histoiredurova', name: 'app_histoire_du_rova')]
-    public function histoire(): Response
+    public function histoire(ParametreRepository $parametreRepository): Response
     {
-        return $this->render('interfacevisiteur/histoiredurova.html.twig');
+        //recuperer les donnees du parametre
+        $parametres = $parametreRepository->findAll();
+        return $this->render('interfacevisiteur/histoiredurova.html.twig', [
+            'parametres' => $parametres
+        ]);
     }
 }

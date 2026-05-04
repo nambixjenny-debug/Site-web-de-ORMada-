@@ -322,18 +322,26 @@ style="background-image:url('{{ asset('images/fondRova.jpg') }}')">
                 <h3 class="text-blue-400 font-bold text-lg mb-4">
                     Informations de contact
                 </h3>
-                <p class="mb-2">Antananarivo, Madagascar</p>
-                <p class="mb-2">+261 34 00 000 00</p>
-                <span>📧</span>
-                <a href="mailto:contact.ormada@gmail.com" class="hover:text-green-600 transition">
-                   nambixjenny@gmail.com
-                </a>
+                 {% for parametre in parametres %} 
+                    <p class="mb-2">{{ parametre.valeur }}</p>
+                {% endfor %}
             </div>
             
             <div>
                 <h3 class="font-bold text-lg mb-4">
                     Réseaux sociaux
                 </h3>
+                <a href="https://www.facebook.com/p/Rovani-Madagasikara-100094032774345"
+                        target="_blank"
+                        class="flex items-center gap-2 text-blue-400 mb-3 hover:text-blue-500 transition">
+
+                            <!-- Icône Facebook -->
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22 12a10 10 0 10-11.5 9.9v-7h-2.2V12h2.2V9.8c0-2.2 1.3-3.4 3.3-3.4.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 2.9h-1.9v7A10 10 0 0022 12z"/>
+                            </svg>
+
+                            <span>Facebook</span>
+                        </a>
                 <button onclick="openModal()"
                         class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg transition duration-300 font-semibold">
                     Contactez-nous
