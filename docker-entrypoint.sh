@@ -21,8 +21,8 @@ echo "==> Installing assets..."
 php bin/console assets:install public --env=prod
 
 echo "==> Installing importmap..."
-# ✅ --env=prod manquait ici !
 php bin/console importmap:install --env=prod
 
-echo "==> Starting Apache..."
-exec apache2-foreground
+# ✅ PHP built-in server — pas d'Apache, pas de MPM
+echo "==> Starting PHP server on port ${PORT:-8080}..."
+exec php -S 0.0.0.0:${PORT:-8080} -t public

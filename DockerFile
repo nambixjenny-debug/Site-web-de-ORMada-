@@ -1,17 +1,11 @@
-FROM php:8.3-apache
+FROM php:8.3-cli
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update && apt-get install -y \
-    git unzip zip libzip-dev libicu-dev libonig-dev default-libmysqlclient-dev default-mysql-client \
+    git unzip zip libzip-dev libicu-dev libonig-dev default-libmysqlclient-dev \
     && docker-php-ext-install pdo pdo_mysql intl zip opcache \
     && apt-get clean
-
-# ✅ Désactiver mpm_event et mpm_worker, activer uniquement mpm_prefork
-RUN a2dismod mpm_event || true \
-    && a2dismod mpm_worker || true \
-    && a2enmod mpm_prefork \
-    && a2enmod rewrite
 
 WORKDIR /var/www/html
 
@@ -24,19 +18,7 @@ COPY . .
 RUN mkdir -p var/cache var/log \
     && chmod -R 777 var/
 
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
-    /etc/apache2/sites-available/*.conf \
-    /etc/apache2/apache2.conf \
-    /etc/apache2/conf-available/*.conf
-
-# ✅ Copier la config Apache
-COPY docker/apache.conf /etc/apache2/conf-available/mpm.conf
-RUN a2enconf mpm
-
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
-EXPOSE 80
 
 CMD ["/usr/local/bin/docker-entrypoint.sh"]
