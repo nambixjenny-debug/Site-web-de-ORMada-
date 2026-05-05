@@ -17,17 +17,17 @@ RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader -
 
 COPY . .
 
-# ✅ Créer un .env minimal pour que Symfony puisse démarrer pendant le build
+# .env temporaire pour le build uniquement
 RUN echo "APP_ENV=prod" > .env \
     && echo "APP_SECRET=placeholder" >> .env \
     && echo "DATABASE_URL=mysql://user:password@localhost:3306/db" >> .env
 
+# ✅ Plus de cache:warmup ici — pas de connexion DB pendant le build
 RUN php bin/console cache:clear --env=prod --no-warmup \
-    && php bin/console cache:warmup --env=prod \
     && php bin/console assets:install public --env=prod \
     && php bin/console importmap:install
 
-# ✅ Supprimer le .env de build — Railway injectera les vraies variables
+# Supprimer le .env temporaire
 RUN rm -f .env
 
 RUN chmod -R 777 var/
@@ -38,6 +38,10 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
     /etc/apache2/apache2.conf \
     /etc/apache2/conf-available/*.conf
 
+# ✅ Script de démarrage
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 EXPOSE 80
 
-CMD ["apache2-foreground"]
+CMD ["/usr/local/bin/docker-entrypoint.sh"]
