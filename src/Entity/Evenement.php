@@ -29,7 +29,7 @@ class Evenement
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTime $datedufin = null;
     
-    #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: Media::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: Media::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $media;
 
     public function __construct()
