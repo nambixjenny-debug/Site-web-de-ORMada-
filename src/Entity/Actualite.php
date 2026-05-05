@@ -30,7 +30,8 @@ class Actualite
     #[ORM\Column]
     private ?bool $dejapublier = null;
 
-    #[ORM\OneToMany(mappedBy: 'actualite', targetEntity: Media::class, cascade: ['persist'])]
+    // ✅ Une seule ligne dans l'entité — tout est géré automatiquement
+    #[ORM\OneToMany(mappedBy: 'actualite', targetEntity: Media::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $media;
 
     public function __construct()
