@@ -4,6 +4,7 @@ set -e
 cat > /var/www/html/.env <<EOF
 APP_ENV="${APP_ENV:-prod}"
 APP_SECRET="${APP_SECRET}"
+APP_DEBUG=0
 APP_SHARE_DIR=var/share
 DEFAULT_URI=http://localhost
 DATABASE_URL="${DATABASE_URL}"
