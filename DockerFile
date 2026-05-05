@@ -1,37 +1,30 @@
 FROM php:8.3-apache
 
-# Installer les dépendances système — MySQL
 RUN apt-get update && apt-get install -y \
-    git unzip zip libzip-dev libicu-dev libonig-dev libmysqlclient-dev default-mysql-client \
+    git unzip zip libzip-dev libicu-dev libonig-dev default-libmysqlclient-dev default-mysql-client \
     && docker-php-ext-install pdo pdo_mysql intl zip opcache \
     && apt-get clean
 
-# Activer mod_rewrite pour Symfony
 RUN a2enmod rewrite
 
-# Installer Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
 COPY composer.json composer.lock ./
 
-# --no-scripts évite l'erreur symfony-cmd
 RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader --no-scripts
 
 COPY . .
 
-# Lancer manuellement les commandes Symfony
 RUN php bin/console cache:clear --env=prod --no-warmup \
     && php bin/console cache:warmup --env=prod \
     && php bin/console assets:install public --env=prod \
     && php bin/console importmap:install
 
-# Permissions
 RUN chmod -R 777 var/
 
-# Apache — pointer vers /public
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
     /etc/apache2/sites-available/*.conf \
     /etc/apache2/apache2.conf \
