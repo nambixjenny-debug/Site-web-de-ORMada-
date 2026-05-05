@@ -74,15 +74,67 @@ final class EvenementController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
-    {
+    public function edit(
+        Request $request,
+        Evenement $evenement,
+        EntityManagerInterface $entityManager
+    ): Response {
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // ✅ Récupérer les nouveaux fichiers uploadés
+            $images = $form->get('images')->getData();
+
+            if ($images && count($images) > 0) {
+
+                // ✅ Supprimer les anciens médias liés à l'événement
+                foreach ($evenement->getMedia() as $ancienMedia) {
+
+                    $ancienFichier = $this->getParameter('kernel.project_dir')
+                        . '/public/' . $ancienMedia->getChemindufichier();
+
+                    if (file_exists($ancienFichier)) {
+                        unlink($ancienFichier);
+                    }
+
+                    $entityManager->remove($ancienMedia);
+                }
+
+                // ✅ Créer dossier upload si inexistant
+                $dossierUpload = $this->getParameter('kernel.project_dir') . '/public/uploads/medias';
+
+                if (!is_dir($dossierUpload)) {
+                    mkdir($dossierUpload, 0777, true);
+                }
+
+                // ✅ Enregistrer nouvelles images
+                foreach ($images as $image) {
+
+                    $nouveauNom = uniqid() . '.' . $image->guessExtension();
+                    $image->move($dossierUpload, $nouveauNom);
+
+                    $media = new Media();
+                    $media->setNomdufichier($nouveauNom);
+                    $media->setTypedufichier($image->getClientMimeType());
+                    $media->setChemindufichier('uploads/medias/' . $nouveauNom);
+                    $media->setUploadat(new \DateTime());
+
+                    // liaison avec evenement
+                    $media->setEvenement($evenement);
+
+                    $entityManager->persist($media);
+                }
+            }
+
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute(
+                'app_evenement_index',
+                [],
+                Response::HTTP_SEE_OTHER
+            );
         }
 
         return $this->render('evenement/edit.html.twig', [

@@ -79,14 +79,54 @@ final class ActualiteController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_actualite_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Actualite $actualite, EntityManagerInterface $entityManager): Response
-    {
+    public function edit(
+        Request $request, 
+        Actualite $actualite, 
+        EntityManagerInterface $entityManager,
+        string $uploadDir = '%kernel.project_dir%/public/uploads/medias'
+    ): Response {
         $form = $this->createForm(ActualiteType::class, $actualite);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
 
+            // ✅ Récupérer les nouveaux fichiers uploadés
+            $images = $form->get('images')->getData();
+
+            if ($images && count($images) > 0) {
+
+                // ✅ Supprimer les anciens médias liés
+                foreach ($actualite->getMedia() as $ancienMedia) {
+                    // Supprimer le fichier physique si il existe
+                    $ancienFichier = $this->getParameter('kernel.project_dir').'/public/'.$ancienMedia->getChemindufichier();
+                    if (file_exists($ancienFichier)) {
+                        unlink($ancienFichier);
+                    }
+                    $entityManager->remove($ancienMedia);
+                }
+
+                // ✅ Sauvegarder les nouveaux fichiers
+                $dossierUpload = $this->getParameter('kernel.project_dir').'/public/uploads/medias';
+                if (!is_dir($dossierUpload)) {
+                    mkdir($dossierUpload, 0777, true);
+                }
+
+                foreach ($images as $image) {
+                    $nouveauNom = uniqid().'.'.$image->guessExtension();
+                    $image->move($dossierUpload, $nouveauNom);
+
+                    $media = new Media();
+                    $media->setNomdufichier($nouveauNom);
+                    $media->setTypedufichier($image->getClientMimeType());
+                    $media->setChemindufichier('uploads/medias/'.$nouveauNom);
+                    $media->setUploadat(new \DateTime());
+                    $media->setActualite($actualite);
+
+                    $entityManager->persist($media);
+                }
+            }
+
+            $entityManager->flush();
             return $this->redirectToRoute('app_actualite_index', [], Response::HTTP_SEE_OTHER);
         }
 

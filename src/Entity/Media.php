@@ -25,10 +25,10 @@ class Media
     #[ORM\Column]
     private ?\DateTime $uploadat = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'media')]
     private ?Actualite $actualite = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'media')]
     private ?Evenement $evenement = null;
 
     public function getId(): ?int
