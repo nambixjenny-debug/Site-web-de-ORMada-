@@ -7,8 +7,11 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_mysql intl zip opcache \
     && apt-get clean
 
-# ✅ Fix MPM conflict
-RUN a2dismod mpm_event mpm_worker && a2enmod mpm_prefork rewrite
+# ✅ Désactiver mpm_event et mpm_worker, activer uniquement mpm_prefork
+RUN a2dismod mpm_event || true \
+    && a2dismod mpm_worker || true \
+    && a2enmod mpm_prefork \
+    && a2enmod rewrite
 
 WORKDIR /var/www/html
 
@@ -26,6 +29,10 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
     /etc/apache2/sites-available/*.conf \
     /etc/apache2/apache2.conf \
     /etc/apache2/conf-available/*.conf
+
+# ✅ Copier la config Apache
+COPY docker/apache.conf /etc/apache2/conf-available/mpm.conf
+RUN a2enconf mpm
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
