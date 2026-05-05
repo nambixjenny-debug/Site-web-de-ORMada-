@@ -14,7 +14,7 @@
                 <span>📅</span>
                 <time datetime="{{ actualite.publierle|date('c') }}">
                     {% if actualite.publierle %}
-                        Publié le {{ actualite.publierle|date('d/m/Y \u00e0 H:i') }}
+                        Publié le {{ actualite.publierle|date('d/m/Y \à H:i') }}
                     {% else %}
                         Non publié
                     {% endif %}
@@ -51,7 +51,7 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Date de publication</label>
                         <div class="px-4 py-3 bg-gray-50 rounded-lg border border-gray-200 text-gray-800">
                             {% if actualite.publierle %}
-                                {{ actualite.publierle|date('d/m/Y \u00e0 H:i') }}
+                                {{ actualite.publierle|date('d/m/Y \à H:i') }}
                             {% else %}
                                 Non spécifiée
                             {% endif %}
