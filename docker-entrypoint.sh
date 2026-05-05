@@ -1,10 +1,16 @@
 #!/bin/bash
 set -e
 
-# ✅ Créer le .env à partir des variables Railway injectées
-echo "APP_ENV=${APP_ENV:-prod}" > /var/www/html/.env
-echo "APP_SECRET=${APP_SECRET}" >> /var/www/html/.env
-echo "DATABASE_URL=${DATABASE_URL}" >> /var/www/html/.env
+# ✅ Guillemets autour des valeurs
+cat > /var/www/html/.env <<EOF
+APP_ENV="${APP_ENV:-prod}"
+APP_SECRET="${APP_SECRET}"
+APP_SHARE_DIR=var/share
+DEFAULT_URI=http://localhost
+DATABASE_URL="${DATABASE_URL}"
+MESSENGER_TRANSPORT_DSN="${MESSENGER_TRANSPORT_DSN:-doctrine://default?auto_setup=0}"
+MAILER_DSN="${MAILER_DSN:-null://null}"
+EOF
 
 echo "==> Clearing cache..."
 php bin/console cache:clear --env=prod --no-warmup
