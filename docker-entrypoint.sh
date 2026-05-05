@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-# ✅ Guillemets autour des valeurs
 cat > /var/www/html/.env <<EOF
 APP_ENV="${APP_ENV:-prod}"
 APP_SECRET="${APP_SECRET}"
@@ -22,7 +21,8 @@ echo "==> Installing assets..."
 php bin/console assets:install public --env=prod
 
 echo "==> Installing importmap..."
-php bin/console importmap:install
+# ✅ --env=prod manquait ici !
+php bin/console importmap:install --env=prod
 
 echo "==> Starting Apache..."
 exec apache2-foreground
