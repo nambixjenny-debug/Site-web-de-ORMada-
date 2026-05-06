@@ -147,6 +147,17 @@ final class EvenementController extends AbstractController
     public function delete(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$evenement->getId(), $request->getPayload()->getString('_token'))) {
+
+            foreach ($evenement->getMedia() as $media) {
+
+                $chemin = $this->getParameter('kernel.project_dir')
+                    . '/public/' . $media->getChemindufichier();
+
+                if (file_exists($chemin)) {
+                    unlink($chemin);
+                }
+            }
+
             $entityManager->remove($evenement);
             $entityManager->flush();
         }

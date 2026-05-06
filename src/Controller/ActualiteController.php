@@ -140,6 +140,17 @@ final class ActualiteController extends AbstractController
     public function delete(Request $request, Actualite $actualite, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$actualite->getId(), $request->getPayload()->getString('_token'))) {
+            
+            foreach ($actualite->getMedia() as $media) {
+
+                $chemin = $this->getParameter('kernel.project_dir')
+                    . '/public/' . $media->getChemindufichier();
+
+                if (file_exists($chemin)) {
+                    unlink($chemin);
+                }
+        }
+        
             $entityManager->remove($actualite);
             $entityManager->flush();
         }
