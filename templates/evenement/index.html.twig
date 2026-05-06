@@ -39,7 +39,7 @@
                             <td class="px-2 py-2">
                                 {% set image = evenement.media|first %}
                                 {% if image %}
-                                    <img src="{{ asset(image.chemindufichier) }}" alt="{{ evenement.titre }}" class="w-full h-28 object-cover rounded-lg">
+                                    <img src="{{ asset(image.chemindufichier) }}" alt="{{ evenement.titre }}" class="h-20 w-20 object-cover rounded">
                                 {% else %}
                                     <img src="{{ asset('images/default.jpg') }}" alt="{{ evenement.titre }}" class="w-full h-28 object-cover rounded-lg">
                                 {% endif %}
