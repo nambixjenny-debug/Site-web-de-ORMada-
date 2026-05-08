@@ -25,6 +25,15 @@ class EvenementRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+     public function AfficherTroisDerniersEvenements(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.datedudebut', 'DESC') // ou date événement
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Evenement[] Returns an array of Evenement objects
 //     */

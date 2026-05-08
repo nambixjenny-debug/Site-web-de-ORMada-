@@ -12,16 +12,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\ParametreRepository;
 use App\Repository\ActualiteRepository;
+use App\Repository\EvenementRepository;
 
 
 final class InterfacevisiteurController extends AbstractController
 {
     #[Route('/interfacevisiteur', name: 'app_interfacevisiteur', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, ParametreRepository $parametreRepository, ActualiteRepository $actualiteRepository): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, ParametreRepository $parametreRepository, ActualiteRepository $actualiteRepository, EvenementRepository $evenementRepository): Response
     {   
 
         $actualitesPublier = $actualiteRepository->AfficherQuatreDernieresActualites();
-
+        $evenements = $evenementRepository->AfficherTroisDerniersEvenements();
         $contact = new Contact();
         $contact->setCreerle(new \DateTime());
         $contact->setDejalu(false);
@@ -45,6 +46,7 @@ final class InterfacevisiteurController extends AbstractController
             'form' => $form->createView(),
             'parametres' => $parametres,
             'actualitesPublier' => $actualitesPublier,
+            'evenements' => $evenements,
         ]);
     }
 
