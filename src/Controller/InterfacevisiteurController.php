@@ -11,13 +11,17 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\ParametreRepository;
+use App\Repository\ActualiteRepository;
 
 
 final class InterfacevisiteurController extends AbstractController
 {
     #[Route('/interfacevisiteur', name: 'app_interfacevisiteur', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, ParametreRepository $parametreRepository): Response
-    {
+    public function new(Request $request, EntityManagerInterface $entityManager, ParametreRepository $parametreRepository, ActualiteRepository $actualiteRepository): Response
+    {   
+
+        $actualitesPublier = $actualiteRepository->AfficherQuatreDernieresActualites();
+
         $contact = new Contact();
         $contact->setCreerle(new \DateTime());
         $contact->setDejalu(false);
@@ -40,6 +44,7 @@ final class InterfacevisiteurController extends AbstractController
             'contact' => $contact,
             'form' => $form->createView(),
             'parametres' => $parametres,
+            'actualitesPublier' => $actualitesPublier,
         ]);
     }
 

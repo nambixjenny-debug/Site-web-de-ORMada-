@@ -149,110 +149,193 @@
     </div>
 </section>
 
-{# SECTION ACTUALITÉS #}
-<section id="actualites" class="py-16 bg-gray-100">
+{# 
+Partie actualités #}
+<section id="actualites" class="py-20 bg-gray-100">
+
     <div class="max-w-6xl mx-auto px-4">
-        
-        <h2 class="text-3xl font-bold text-center mb-12">
+
+        <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
             Actualités
         </h2>
 
         <!-- CARROUSEL -->
-        <div class="relative overflow-hidden">
+        <div class="relative overflow-hidden rounded-2xl">
 
             <!-- Slides -->
-            <div id="carousel" class="flex transition-transform duration-500">
+            <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
 
-                <!-- ACTU 1 -->
-                <div class="min-w-full grid md:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <h3 class="text-xl font-bold mb-3">Tsapiky Festival</h3>
-                        <p class="text-gray-600 mb-4">
-                            Le Rovan’i Madagasikara a vibré au rythme du Tsapiky lors d’un festival exceptionnel réunissant artistes, danseurs et passionnés de culture malgache. Cet événement, organisé en collaboration avec plusieurs acteurs culturels, a mis en lumière la richesse et la diversité musicale du sud de Madagascar.
+                {% for actualite in actualitesPublier %}
 
-Durant plusieurs jours, les visiteurs ont pu assister à des performances live, découvrir des danses traditionnelles et participer à des ateliers culturels. Le Tsapiky, connu pour son rythme rapide et entraînant, a su captiver un large public venu de différentes régions du pays.
+                    <!-- UNE SLIDE = UNE ACTUALITÉ -->
+                    <div class="min-w-full px-1">
 
-« Ce festival est une occasion unique de valoriser notre patrimoine musical et de renforcer l’unité culturelle », ont déclaré les organisateurs.
+                        <div class="bg-white rounded-2xl shadow-md p-6 md:p-8">
 
-En plus des spectacles, des stands d’artisanat et de gastronomie locale ont permis aux visiteurs de découvrir les savoir-faire traditionnels malgaches dans une ambiance conviviale
-                        </p>
-                        <button class="bg-black text-white px-4 py-2 rounded-lg">Voir plus...</button>
+                            <div class="grid md:grid-cols-2 gap-8 items-stretch">
+
+                                <!-- ===================== -->
+                                <!-- CONTENU -->
+                                <!-- ===================== -->
+                                <div class="flex flex-col justify-center">
+
+                                    <span class="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-3 w-fit">
+                                        Actualité
+                                    </span>
+
+                                    <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+                                        {{ actualite.titre }}
+                                    </h3>
+
+                                  
+                                    {# <p class="text-gray-700 leading-relaxed text-justify">
+                                        {{ actualite.contenu }}...
+                                    </p> #}
+                                    <p class="whitespace-pre-line leading-relaxed">
+                                        {{ actualite.contenu }}
+                                    </p>
+
+                                </div>
+                                <!-- ===================== -->
+                                <!-- IMAGES -->
+                                <!-- ===================== -->
+                                <div class="grid md:grid-cols-1 gap-6 items-stretch">
+
+                                    
+                                    {# <div class="grid gap-3 h-full"> #}
+
+                                        {% set totalImages = actualite.media|length %}
+
+                                        {# ===================== #}
+                                        {# 0 IMAGE #}
+                                        {# ===================== #}
+                                        {% if totalImages == 0 %}
+
+                                            <img src="{{ asset('images/default.jpg') }}"
+                                                class="w-full h-full min-h-[250px] object-cover rounded-xl shadow">
+
+                                        {# ===================== #}
+                                        {# 1 IMAGE #}
+                                        {# ===================== #}
+                                        {% elseif totalImages == 1 %}
+
+                                            {% set image = actualite.media|first %}
+
+                                            <img src="{{ asset(image.chemindufichier) }}"
+                                                class="w-full h-full object-cover rounded-xl shadow hover:scale-105 transition duration-300">
+
+                                        {# ===================== #}
+                                        {# 2 IMAGES #}
+                                        {# ===================== #}
+                                        {% elseif totalImages == 2 %}
+
+                                            <div class="grid grid-cols-2 gap-3 h-full">
+
+                                                {% for image in actualite.media|slice(0,2) %}
+                                                    <img src="{{ asset(image.chemindufichier) }}"
+                                                        class="w-full h-full object-cover rounded-xl hover:scale-105 transition duration-300">
+                                                {% endfor %}
+
+                                            </div>
+
+                                        {# ===================== #}
+                                        {# 3+ IMAGES #}
+                                        {# ===================== #}
+                                        {% else %}
+
+                                            <div class="grid grid-cols-2 gap-3 h-full">
+
+                                                <!-- grande image -->
+                                                <div class="row-span-2 overflow-hidden rounded-xl">
+                                                    <img src="{{ asset(actualite.media[0].chemindufichier) }}"
+                                                        class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                                                </div>
+
+                                                <!-- 2e -->
+                                                <img src="{{ asset(actualite.media[1].chemindufichier) }}"
+                                                    class="w-full h-full object-cover rounded-xl hover:scale-105 transition duration-300">
+
+                                                <!-- 3e + overlay -->
+                                                <div class="relative overflow-hidden rounded-xl">
+
+                                                    <img src="{{ asset(actualite.media[2].chemindufichier) }}"
+                                                        class="w-full h-full object-cover hover:scale-105 transition duration-300">
+
+                                                    {% if totalImages > 3 %}
+                                                        <button
+                                                            type="button"
+                                                            onclick="openGallery('gallery{{ actualite.id }}')"
+                                                            class="absolute inset-0 bg-black/60 text-white text-xl font-bold flex items-center justify-center">
+                                                            +{{ totalImages - 3 }}
+                                                        </button>
+                                                    {% endif %}
+
+                                                </div>
+
+                                            </div>
+
+                                        {% endif %}
+
+                                     {# </div> #}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
                     </div>
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800"
-                         class="rounded-xl shadow-lg h-64 object-cover w-full">
-                </div>
 
-                <!-- ACTU 2 -->
-                <div class="min-w-full grid md:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <h3 class="text-xl font-bold mb-3">Rova d’Antananarivo</h3>
-                        <p class="text-gray-600 mb-4">
-                            Réhabilitation du Rova et ouverture au public.
-                        </p>
-                        <button class="bg-black text-white px-4 py-2 rounded-lg">Voir plus...</button>
-                    </div>
-                    <img src="images/fondRova.jpg"
-                         class="rounded-xl shadow-lg h-64 object-cover w-full">
-                </div>
+                {% else %}
 
-                <!-- ACTU 3 -->
-                <div class="min-w-full grid md:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <h3 class="text-xl font-bold mb-3">Festival Donia</h3>
-                        <p class="text-gray-600 mb-4">
-                            Grand festival à Nosy Be avec artistes internationaux.
+                    <div class="min-w-full text-center py-20 bg-white rounded-2xl shadow">
+                        <p class="text-gray-500 text-lg">
+                            Aucune actualité disponible.
                         </p>
-                        <button class="bg-black text-white px-4 py-2 rounded-lg">Voir plus...</button>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800"
-                         class="rounded-xl shadow-lg h-64 object-cover w-full">
-                </div>
 
-                <!-- ACTU 4 -->
-                <div class="min-w-full grid md:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <h3 class="text-xl font-bold mb-3">Artisanat Malagasy</h3>
-                        <p class="text-gray-600 mb-4">
-                            Mise en valeur des artisans locaux et produits traditionnels.
-                        </p>
-                        <button class="bg-black text-white px-4 py-2 rounded-lg">Voir plus...</button>
-                    </div>
-                    <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800"
-                         class="rounded-xl shadow-lg h-64 object-cover w-full">
-                </div>
+                {% endfor %}
 
             </div>
 
-      
-            <div class="flex flex-col items-center mt-6 space-y-4">
+            
+
+            <!-- CONTROLS -->
+            <div class="flex flex-col items-center mt-8 space-y-4">
 
                 <!-- Boutons -->
                 <div class="flex gap-4">
-                    <button onclick="prevSlide()" 
-                        class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-full">
-                        <
-                        
+
+                    <button onclick="prevSlide()"
+                        class="w-10 h-10 rounded-full bg-white shadow hover:bg-gray-200 transition">
+                        ‹
                     </button>
 
-                    <button onclick="nextSlide()" 
-                        class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-full">
-                        >
+                    <button onclick="nextSlide()"
+                        class="w-10 h-10 rounded-full bg-white shadow hover:bg-gray-200 transition">
+                        ›
                     </button>
+
                 </div>
 
-                <!-- Dots -->
+                <!-- Dots dynamiques -->
                 <div id="dots" class="flex gap-2">
-                    <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer"></span>
-                    <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer"></span>
-                    <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer"></span>
-                    <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer"></span>
+                    {% for actualite in actualitesPublier %}
+                        <span class="dot w-3 h-3 bg-gray-400 rounded-full cursor-pointer transition"></span>
+                    {% endfor %}
                 </div>
 
             </div>
 
         </div>
+
     </div>
+
 </section>
+
+
+
+
 
 {# SECTION ÉVÉNEMENTS #}
 <section id="evenements" class="py-16 md:py-20">
@@ -862,51 +945,98 @@ function toggleMobileMenu() {
     menu.classList.toggle('hidden');
 }
 
-{# Gestion du carrousel #}
+document.addEventListener("DOMContentLoaded", function () {
 
-let currentSlide = 0;
+    const carousel = document.getElementById("carousel");
 
-function showSlide (){
-    const carousel = document.getElementById('carousel');
-    carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-    updateDots();
-}
+    if (!carousel) return;
 
-function nextSlide(){
-    const totalSlides = document.querySelectorAll('#carousel > div').length;
-    currentSlide = (currentSlide + 1) % totalSlides;
-    showSlide();
-}
+    const slides = carousel.children;
+    const totalSlides = slides.length;
 
-function prevSlide(){
-    const totalSlides = document.querySelectorAll('#carousel > div').length;
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    showSlide();
-}
+    if (totalSlides === 0) return;
 
-{# clic sur les dots pour aller à une slide spécifique #}
+    const dots = document.querySelectorAll("#dots .dot");
 
-function updateDots(){
-    const dots = document.querySelectorAll('.dot');
-    dots.forEach((dot, i) => {
-        dot.classList.remove('bg-red-800');
-        dot.classList.add('bg-gray-400');
+    let currentIndex = 0;
+    let autoSlide;
 
-        if (i === currentSlide){
-            dot.classList.remove('bg-gray-400');
-            dot.classList.add('bg-red-800');
+    function updateCarousel() {
+        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
 
+        dots.forEach((dot, index) => {
+            dot.classList.remove("bg-blue-600", "scale-125");
+            dot.classList.add("bg-gray-400");
+
+            if (index === currentIndex) {
+                dot.classList.remove("bg-gray-400");
+                dot.classList.add("bg-blue-600", "scale-125");
+            }
+        });
+    }
+
+    window.nextSlide = function () {
+        currentIndex++;
+
+        if (currentIndex >= totalSlides) {
+            currentIndex = 0;
         }
-    })
-}
 
-document.querySelectorAll(".dot").forEach((dot, i) => {
-    dot.addEventListener("click", () => {
-        currentSlide = i;
-        showSlide();
+        updateCarousel();
+        restartAutoSlide();
+    };
+
+    window.prevSlide = function () {
+        currentIndex--;
+
+        if (currentIndex < 0) {
+            currentIndex = totalSlides - 1;
+        }
+
+        updateCarousel();
+        restartAutoSlide();
+    };
+
+    {# function startAutoSlide() {
+        autoSlide = setInterval(() => {
+            nextSlide();
+        }, 5000);
+    } #}
+
+    function restartAutoSlide() {
+        clearInterval(autoSlide);
+        startAutoSlide();
+    }
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+            currentIndex = index;
+            updateCarousel();
+            restartAutoSlide();
+        });
     });
+
+    let startX = 0;
+    let endX = 0;
+
+    carousel.addEventListener("touchstart", e => {
+        startX = e.changedTouches[0].screenX;
+    });
+
+    carousel.addEventListener("touchend", e => {
+        endX = e.changedTouches[0].screenX;
+
+        if (startX - endX > 50) nextSlide();
+        if (endX - startX > 50) prevSlide();
+    });
+
+    carousel.addEventListener("mouseenter", () => clearInterval(autoSlide));
+    carousel.addEventListener("mouseleave", () => startAutoSlide());
+
+    updateCarousel();
+    startAutoSlide();
+
 });
-showSlide();
 
 
 
