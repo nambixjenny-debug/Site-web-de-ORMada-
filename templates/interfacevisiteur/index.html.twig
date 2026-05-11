@@ -158,6 +158,12 @@ Partie actualités #}
         <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
             Actualités
         </h2>
+        <p class="text-justify text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+            Restez informés des dernières actualités du site royal d’Antananarivo. 
+            Retrouvez ici les annonces importantes, nouveautés, projets en cours, 
+            communiqués officiels et informations utiles concernant la valorisation 
+            et la préservation de notre patrimoine historique.
+        </p>
 
         <!-- CARROUSEL -->
         <div class="relative overflow-hidden rounded-2xl">
@@ -192,7 +198,7 @@ Partie actualités #}
                                         {{ actualite.contenu }}...
                                     </p> #}
                                     <p class="whitespace-pre-line leading-relaxed">
-                                        {{ actualite.contenu }}
+                                        {{ actualite.contenu|slice(0, 200) }} <a  href="#" class="text-black font-bold">...Voir plus </a>   
                                     </p>
 
                                 </div>
@@ -298,6 +304,33 @@ Partie actualités #}
 
             </div>
 
+            <!-- =============================== -->
+            <!-- BOUTON VOIR PLUS ACTUALITÉS -->
+            <!-- =============================== -->
+            <div class="mt-10 mx-4 flex justify-start">
+
+                <a href="#"
+                class="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+
+                    Voir plus d'actualités
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor">
+
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5l7 7-7 7" />
+
+                    </svg>
+
+                </a>
+
+            </div>
+
             
 
             <!-- CONTROLS -->
@@ -341,9 +374,16 @@ Partie actualités #}
 <section id="evenements" class="py-16 md:py-20">
     <div class="max-w-6xl mx-auto px-4">
 
-        <h2 class="text-2xl md:text-3xl font-bold text-center mb-12 md:mb-16">
+        <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-6">
             Événements
         </h2>
+
+        <p class="text-justify text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+            Découvrez les événements marquants organisés au sein du site royal d’Antananarivo. 
+            Entre activités culturelles, visites guidées, expositions et animations éducatives, 
+            chaque rendez-vous est une occasion unique de valoriser notre patrimoine historique 
+            et de partager des moments enrichissants avec le public.
+        </p>
 
         <div class="grid md:grid-cols-3 gap-6 md:gap-8">
 
@@ -399,7 +439,35 @@ Partie actualités #}
             {% endfor %}
 
         </div>
+          <!-- =============================== -->
+        <!-- BOUTON VOIR PLUS ÉVÉNEMENTS -->
+        <!-- =============================== -->
+        <div class="mt-10 mx-4 flex justify-start">
+
+            <a href="#"
+            class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+
+                Voir plus d'événements
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7" />
+
+                </svg>
+
+            </a>
+
+        </div>
     </div>
+
+  
 </section>
 
 {# SECTION INFORMATIONS #}
@@ -410,23 +478,101 @@ Partie actualités #}
         </h2>
         
         <div class="grid md:grid-cols-2 gap-8 md:gap-12">
-            <div class="bg-white p-6 rounded-xl shadow-md">
-                <h3 class="text-red-600 font-bold text-xl mb-4">
-                    Cultures et fady
-                </h3>
-                <p class="text-gray-700 leading-relaxed">
-                    Le Rovan’i Madagasikara n’est pas seulement un site historique, 
-                    mais aussi un lieu profondément ancré dans les traditions et les croyances malgaches.
-                    Pour préserver son caractère sacré et respecter la mémoire des souverains, certaines règles culturelles, 
-                    appelées fady, doivent être observées par tous les visiteurs
-                </p>
-                <button onclick="openFadyModal()"
-                    class="bg-red-700 hover:bg-bleu-800 text-white px-6 py-3 rounded-lg shadow-lg transition mt-4">
-                    En savoir plus...
-                </button>
+            <div class="max-w-4xl mx-auto space-y-8">
+
+                <!-- ======================= -->
+                <!-- BLOC CULTURE ET FADY -->
+                <!-- ======================= -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition duration-300">
+
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-2xl">
+                            🏛️
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800">
+                                Cultures et fady
+                            </h3>
+
+                            <p class="text-sm text-gray-500">
+                                Rovan'i Madagasikara
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-700 leading-relaxed text-justify">
+                        Le Rovan’i Madagasikara n’est pas seulement un site historique, 
+                        mais aussi un lieu profondément ancré dans les traditions et croyances malgaches.
+                        Pour préserver son caractère sacré et respecter la mémoire des souverains, 
+                        certaines règles culturelles appelées <strong>fady</strong> doivent être respectées 
+                        par tous les visiteurs.
+                    </p>
+
+                    <button onclick="openFadyModal()"
+                        class="mt-5 bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded-xl shadow-md transition">
+                        En savoir plus...
+                    </button>
+
+                </div>
+
+
+                <!-- ======================= -->
+                <!-- BLOC HORAIRES -->
+                <!-- ======================= -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition duration-300">
+
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-2xl">
+                            🕒
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800">
+                                Horaires de visite
+                            </h3>
+
+                            <p class="text-sm text-gray-500">
+                                Rovan'ny Manjakamiadana
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+
+                        <div class="flex justify-between items-center bg-gray-50 rounded-xl px-4 py-3">
+                            <span class="text-gray-600 font-medium">Jours d'ouverture</span>
+                            <span class="font-semibold text-green-600">Mercredi - Lundi</span>
+                        </div>
+
+                        <div class="flex justify-between items-center bg-gray-50 rounded-xl px-4 py-3">
+                            <span class="text-gray-600 font-medium">Ouverture</span>
+                            <span class="font-semibold text-blue-600">09h00</span>
+                        </div>
+
+                        <div class="flex justify-between items-center bg-gray-50 rounded-xl px-4 py-3">
+                            <span class="text-gray-600 font-medium">Fermeture</span>
+                            <span class="font-semibold text-red-500">17h00</span>
+                        </div>
+
+                        <div class="flex justify-between items-center bg-red-50 rounded-xl px-4 py-3">
+                            <span class="text-gray-600 font-medium">Jour fermé</span>
+                            <span class="font-semibold text-red-600">Mardi</span>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-5 text-sm text-gray-500 text-center border-t pt-4">
+                        Les horaires peuvent changer selon les jours fériés ou événements spéciaux.
+                    </div>
+
+                </div>
+
             </div>
 
-            {# Modal qui affiche tous les fady liés au Rova de Manjakamiadana #}
+
+
+        {# Modal qui affiche tous les fady liés au Rova de Manjakamiadana #}
 
         <div id="fadyModal"
             class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
@@ -499,171 +645,182 @@ Partie actualités #}
 
 {#      Inforamtion sur les tarifs d'entrée du Rova de Manjakamiadana #}
             
-            <div class="max-w-4xl mx-auto">
-    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-        <!-- Bandeau décoratif vert émeraude -->
-        <div class="h-2 bg-gradient-to-r from-emerald-600 to-emerald-400"></div>
-        
-        <div class="p-8">
-            <!-- En-tête -->
-            <div class="text-center mb-8">
-                <div class="inline-block p-3 bg-emerald-100 rounded-full mb-4">
-                    <svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-2xl font-bold text-gray-800 mb-2">
-                    Tarifs d'entrée du Rova de Manjakamiadana
-                </h3>
-                <div class="w-20 h-1 bg-emerald-500 mx-auto rounded-full mb-4"></div>
-                <p class="text-gray-600 leading-relaxed max-w-2xl mx-auto">
-                    Les tarifs d'entrée varient en fonction de la nationalité, de l'âge et du type de visite (complète ou partielle). 
-                    Des réductions sont disponibles pour les groupes de 5 personnes ou plus.
-                </p>
-            </div>
+            <div class="max-w-4xl mx-auto ">
+    
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
 
-            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
-                🎟️ Tarifs de visite
-            </h2>
+                    <!-- Bandeau décoratif -->
+                    <div class="h-1.5 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400"></div>
 
-            <div class="space-y-6">
+                    <div class="p-6 md:p-7">
 
-                <!-- VISITE COMPLETE -->
-                <div class="border border-emerald-200 rounded-xl overflow-hidden">
-                    <div class="bg-gradient-to-r from-emerald-600 to-emerald-500 px-6 py-3">
-                        <h3 class="text-lg font-bold text-white">
-                            🏚️ VISITE COMPLÈTE
-                        </h3>
-                    </div>
+                        <!-- HEADER -->
+                        <div class="text-center mb-6">
 
-                    <div class="p-6 bg-white">
-                        <div class="space-y-6">
-                            <!-- Malagasy -->
-                            <div class="border-b border-gray-100 pb-4 last:border-0">
-                                <div class="flex items-center gap-2 mb-3">
-                                    <span class="text-xl">🇲🇬</span>
-                                    <p class="font-semibold text-gray-800">Malagasy et Résident</p>
-                                </div>
-                                <div class="space-y-2 ml-7">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-600">Moins de 15 ans :</span>
-                                        <div class="text-right">
-                                            <span class="font-bold text-emerald-700 text-lg">5 000 Ar</span>
-                                            <span class="text-gray-500 text-sm ml-2">(3 000 Ar si ≥ 5 pers)</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-600">15 ans et plus :</span>
-                                        <div class="text-right">
-                                            <span class="font-bold text-emerald-700 text-lg">10 000 Ar</span>
-                                            <span class="text-gray-500 text-sm ml-2">(7 000 Ar si ≥ 5 pers)</span>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="inline-flex items-center justify-center w-14 h-14 bg-emerald-100 rounded-full mb-3 shadow-sm">
+                                <svg class="w-7 h-7 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    </path>
+                                </svg>
                             </div>
 
-                            <!-- Etranger -->
-                            <div>
-                                <div class="flex items-center gap-2 mb-3">
-                                    <span class="text-xl">🌍</span>
-                                    <p class="font-semibold text-gray-800">Étranger non résident</p>
-                                </div>
-                                <div class="space-y-2 ml-7">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-600">Moins de 15 ans :</span>
-                                        <div class="text-right">
-                                            <span class="font-bold text-emerald-700 text-lg">20 000 Ar</span>
-                                            <span class="text-gray-500 text-sm ml-2">(15 000 Ar si ≥ 5 pers)</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-600">15 ans et plus :</span>
-                                        <div class="text-right">
-                                            <span class="font-bold text-emerald-700 text-lg">40 000 Ar</span>
-                                            <span class="text-gray-500 text-sm ml-2">(30 000 Ar si ≥ 5 pers)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+                                Tarifs d'entrée au Rova 
+                            </h3>
+
+                            <div class="w-16 h-1 bg-emerald-500 mx-auto rounded-full mb-3"></div>
+
+                            <p class="text-gray-600 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+                                Les tarifs varient selon la nationalité, l'âge et le type de visite.
+                                Une réduction est accordée aux groupes de 5 personnes ou plus.
+                            </p>
+
                         </div>
-                    </div>
-                </div>
 
-                <!-- VISITE PARTIELLE -->
-                <div class="border border-emerald-200 rounded-xl overflow-hidden">
-                    <div class="bg-gradient-to-r from-emerald-600 to-emerald-500 px-6 py-3">
-                        <h3 class="text-lg font-bold text-white">
-                            👑 VISITE PARTIELLE <span class="text-sm font-normal">(Palais Manjakamiadana)</span>
-                        </h3>
-                    </div>
+                        <!-- TITRE -->
+                        <h2 class="text-xl md:text-2xl font-bold text-center text-gray-800 mb-5">
+                            🎟️ Tarifs de visite
+                        </h2>
 
-                    <div class="p-6 bg-white">
-                        <div class="space-y-6">
-                            <!-- Malagasy -->
-                            <div class="border-b border-gray-100 pb-4 last:border-0">
-                                <div class="flex items-center gap-2 mb-3">
-                                    <span class="text-xl">🇲🇬</span>
-                                    <p class="font-semibold text-gray-800">Malagasy et Résident</p>
+                        <!-- BLOCS -->
+                        <div class="space-y-4">
+
+                            <!-- VISITE COMPLETE -->
+                            <div class="border border-emerald-200 rounded-xl overflow-hidden shadow-sm">
+
+                                <div class="bg-gradient-to-r from-emerald-600 to-emerald-500 px-5 py-2.5">
+                                    <h3 class="text-base md:text-lg font-bold text-white">
+                                        🏚️ VISITE COMPLÈTE
+                                    </h3>
                                 </div>
-                                <div class="space-y-2 ml-7">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-600">Moins de 15 ans :</span>
-                                        <div class="text-right">
-                                            <span class="font-bold text-emerald-700 text-lg">2 000 Ar</span>
-                                            <span class="text-gray-500 text-sm ml-2">(1 000 Ar si ≥ 5 pers)</span>
+
+                                <div class="p-5 bg-white space-y-5">
+
+                                    <!-- Malagasy -->
+                                    <div class="pb-4 border-b border-gray-100">
+
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span>🇲🇬</span>
+                                            <p class="font-semibold text-gray-800">Malagasy et Résident</p>
                                         </div>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-600">15 ans et plus :</span>
-                                        <div class="text-right">
-                                            <span class="font-bold text-emerald-700 text-lg">5 000 Ar</span>
-                                            <span class="text-gray-500 text-sm ml-2">(3 500 Ar si ≥ 5 pers)</span>
+
+                                        <div class="space-y-2 ml-6 text-sm">
+
+                                            <div class="flex justify-between gap-4">
+                                                <span class="text-gray-600">Moins de 15 ans :</span>
+                                                <span class="font-bold text-emerald-700">5 000 Ar</span>
+                                            </div>
+
+                                            <div class="flex justify-between gap-4">
+                                                <span class="text-gray-600">15 ans et plus :</span>
+                                                <span class="font-bold text-emerald-700">10 000 Ar</span>
+                                            </div>
+
                                         </div>
+
                                     </div>
+
+                                    <!-- Etranger -->
+                                    <div>
+
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span>🌍</span>
+                                            <p class="font-semibold text-gray-800">Étranger non résident</p>
+                                        </div>
+
+                                        <div class="space-y-2 ml-6 text-sm">
+
+                                            <div class="flex justify-between gap-4">
+                                                <span class="text-gray-600">Moins de 15 ans :</span>
+                                                <span class="font-bold text-emerald-700">20 000 Ar</span>
+                                            </div>
+
+                                            <div class="flex justify-between gap-4">
+                                                <span class="text-gray-600">15 ans et plus :</span>
+                                                <span class="font-bold text-emerald-700">40 000 Ar</span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
                                 </div>
                             </div>
 
-                            <!-- Etranger -->
-                            <div>
-                                <div class="flex items-center gap-2 mb-3">
-                                    <span class="text-xl">🌍</span>
-                                    <p class="font-semibold text-gray-800">Étranger non résident</p>
+                            <!-- VISITE PARTIELLE -->
+                            <div class="border border-emerald-200 rounded-xl overflow-hidden shadow-sm">
+
+                                <div class="bg-gradient-to-r from-emerald-600 to-emerald-500 px-5 py-2.5">
+                                    <h3 class="text-base md:text-lg font-bold text-white">
+                                        👑 VISITE PARTIELLE
+                                        <span class="text-xs md:text-sm font-normal">(Palais Manjakamiadana)</span>
+                                    </h3>
                                 </div>
-                                <div class="space-y-2 ml-7">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-600">Moins de 15 ans :</span>
-                                        <div class="text-right">
-                                            <span class="font-bold text-emerald-700 text-lg">10 000 Ar</span>
-                                            <span class="text-gray-500 text-sm ml-2">(7 000 Ar si ≥ 5 pers)</span>
+
+                                <div class="p-5 bg-white space-y-5">
+
+                                    <!-- Malagasy -->
+                                    <div class="pb-4 border-b border-gray-100">
+
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span>🇲🇬</span>
+                                            <p class="font-semibold text-gray-800">Malagasy et Résident</p>
                                         </div>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-600">15 ans et plus :</span>
-                                        <div class="text-right">
-                                            <span class="font-bold text-emerald-700 text-lg">20 000 Ar</span>
-                                            <span class="text-gray-500 text-sm ml-2">(15 000 Ar si ≥ 5 pers)</span>
+
+                                        <div class="space-y-2 ml-6 text-sm">
+
+                                            <div class="flex justify-between gap-4">
+                                                <span class="text-gray-600">Moins de 15 ans :</span>
+                                                <span class="font-bold text-emerald-700">2 000 Ar</span>
+                                            </div>
+
+                                            <div class="flex justify-between gap-4">
+                                                <span class="text-gray-600">15 ans et plus :</span>
+                                                <span class="font-bold text-emerald-700">5 000 Ar</span>
+                                            </div>
+
                                         </div>
+
                                     </div>
+
+                                    <!-- Etranger -->
+                                    <div>
+
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span>🌍</span>
+                                            <p class="font-semibold text-gray-800">Étranger non résident</p>
+                                        </div>
+
+                                        <div class="space-y-2 ml-6 text-sm">
+
+                                            <div class="flex justify-between gap-4">
+                                                <span class="text-gray-600">Moins de 15 ans :</span>
+                                                <span class="font-bold text-emerald-700">10 000 Ar</span>
+                                            </div>
+
+                                            <div class="flex justify-between gap-4">
+                                                <span class="text-gray-600">15 ans et plus :</span>
+                                                <span class="font-bold text-emerald-700">20 000 Ar</span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
                                 </div>
                             </div>
+
                         </div>
+
+                        <!-- FOOTER -->
+                        <div class="mt-5 pt-4 border-t border-gray-100 text-center text-sm text-gray-500">
+                            Réduction automatique pour les groupes de 5 personnes ou plus.
+                        </div>
+
                     </div>
                 </div>
-
             </div>
-
-            <!-- Note de bas de page -->
-            <div class="mt-6 pt-4 border-t border-gray-200 text-center">
-                <div class="inline-flex items-center gap-2 text-sm text-gray-500">
-                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <span>Réduction automatique pour les groupes de 5 personnes ou plus</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
         </div>
 </section>
 
