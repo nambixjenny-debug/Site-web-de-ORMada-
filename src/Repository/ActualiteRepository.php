@@ -36,6 +36,8 @@ class ActualiteRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+  
+
 //    /**
 //     * @return Actualite[] Returns an array of Actualite objects
 //     */

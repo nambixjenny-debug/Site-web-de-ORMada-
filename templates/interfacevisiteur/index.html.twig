@@ -17,6 +17,20 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        body{
+    font-family: 'Inter', sans-serif;
+}
+
+/* Titres principaux */
+h1, h2{
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.5px;
+}
+
+/* Sous-titres */
+h3, h4, h5{
+    font-family: 'Poppins', sans-serif;
+}
         .fade-in {
             animation: fadeIn 0.8s ease-out;
         }
@@ -208,7 +222,7 @@ Partie actualités #}
                                 <div class="grid md:grid-cols-1 gap-6 items-stretch">
 
                                     
-                                    {# <div class="grid gap-3 h-full"> #}
+                                  
 
                                         {% set totalImages = actualite.media|length %}
 
@@ -281,8 +295,6 @@ Partie actualités #}
                                             </div>
 
                                         {% endif %}
-
-                                     {# </div> #}
 
                                 </div>
 
@@ -422,9 +434,9 @@ Partie actualités #}
                             {{ evenement.description|slice(0,120) }}...
                         </p>
 
-                        <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}"
+                        <a href="{{ path('app_ShowEvenement', {'id': evenement.id}) }}"
                            class="text-green-600 font-semibold hover:underline">
-                            Voir détails →
+                            Voir plus →
                         </a>
 
                     </div>
@@ -678,11 +690,7 @@ Partie actualités #}
 
                         </div>
 
-                        <!-- TITRE -->
-                        <h2 class="text-xl md:text-2xl font-bold text-center text-gray-800 mb-5">
-                            🎟️ Tarifs de visite
-                        </h2>
-
+                        
                         <!-- BLOCS -->
                         <div class="space-y-4">
 

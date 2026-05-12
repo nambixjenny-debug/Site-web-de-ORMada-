@@ -65,10 +65,18 @@ final class EvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_evenement_show', methods: ['GET'])]
-    public function show(Evenement $evenement): Response
+    // #[Route('/{id}', name: 'app_evenement_show', methods: ['GET'])]
+    // public function show(Evenement $evenement): Response
+    // {
+    //     return $this->render('evenement/show.html.twig', [
+    //         'evenement' => $evenement,
+    //     ]);
+    // }
+
+     #[Route('/{id}', name: 'app_ShowEvenement', methods: ['GET'])]
+    public function ShowEvenement(Evenement $evenement): Response
     {
-        return $this->render('evenement/show.html.twig', [
+        return $this->render('interfacevisiteur/ShowEvenement.html.twig', [
             'evenement' => $evenement,
         ]);
     }

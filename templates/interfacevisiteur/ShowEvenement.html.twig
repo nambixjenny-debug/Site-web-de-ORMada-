@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ evenement.titre }} - ORMada</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rouge:      '#8B1A1A',
+            'rouge-dark': '#5C0E0E',
+            or:         '#C9A84C',
+            'or-light': '#E8C97A',
+            creme:      '#F9F3E8',
+            brun:       '#3A2A1A',
+            gris:       '#6B6055',
+            'gris-clair': '#F2EDE4',
+            blanc:      '#FEFCF7',
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans:  ['Jost', 'sans-serif'],
+          },
+          keyframes: {
+            fadeUp: {
+              '0%':   { opacity: '0', transform: 'translateY(22px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            lbIn: {
+              '0%':   { opacity: '0', transform: 'scale(0.93)' },
+              '100%': { opacity: '1', transform: 'scale(1)' },
+            },
+          },
+          animation: {
+            'fade-up-0': 'fadeUp 0.5s ease both',
+            'fade-up-1': 'fadeUp 0.6s ease 0.1s both',
+            'fade-up-2': 'fadeUp 0.6s ease 0.2s both',
+            'fade-up-3': 'fadeUp 0.6s ease 0.3s both',
+            'lb-in':     'lbIn 0.3s ease',
+          },
+          boxShadow: {
+            'card':  '0 4px 40px rgba(58,42,26,0.10)',
+            'card-sm': '0 2px 20px rgba(58,42,26,0.10)',
+            'btn':   '0 8px 24px rgba(139,26,26,0.30)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Jost', sans-serif; }
+    /* Utility pour border-left or */
+    .border-l-or { border-left: 3px solid #C9A84C; }
+    /* label::after gold line */
+    .label-line::after {
+      content: ''; display: inline-block;
+      width: 40px; height: 1px;
+      background: #C9A84C; opacity: .4;
+      vertical-align: middle; margin-left: 8px;
+    }
+    /* topbar-back arrow */
+    .back-link::before { content: '← '; }
+  </style>
+</head>
+
+<body class="bg-creme text-brun min-h-screen font-sans">
+
+  <!-- ══════════════ TOPBAR ══════════════ -->
+  <header class="bg-rouge-dark h-16 flex items-center justify-between px-[5%] border-b-2 border-or/25">
+
+    <a href="{{ path('app_interfacevisiteur') }}"
+       class="font-serif text-[1.4rem] font-bold text-or-light tracking-wide no-underline">
+      ORMada
+    </a>
+
+    <a href="{{ path('app_interfacevisiteur') }}"
+       class="back-link text-[.82rem] font-semibold tracking-widest uppercase text-white/70 no-underline hover:text-or-light transition-colors duration-200">
+      Retour aux événements
+    </a>
+
+  </header>
+
+  <!-- ══════════════ PAGE ══════════════ -->
+  <main class="max-w-[1100px] mx-auto px-6 pt-[52px] pb-20">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-[.78rem] font-medium tracking-widest uppercase text-gris mb-9 animate-fade-up-0">
+      <a href="{{ path('app_interfacevisiteur') }}"
+         class="text-or no-underline hover:text-rouge transition-colors duration-200">Accueil</a>
+      <span>›</span>
+      <a href="{{ path('app_interfacevisiteur') }}#evenements"
+         class="text-or no-underline hover:text-rouge transition-colors duration-200">Événements</a>
+      <span>›</span>
+      <span class="text-gris truncate max-w-[200px]">{{ evenement.titre }}</span>
+    </nav>
+
+    <!-- ══ HERO CARD ══ -->
+    <div class="bg-blanc rounded-[10px] overflow-hidden shadow-card grid grid-cols-1 lg:grid-cols-2 min-h-[420px] mb-8 animate-fade-up-1 group">
+
+      <!-- Image -->
+      <div class="relative overflow-hidden min-h-[280px] lg:min-h-[380px]">
+
+        {% set image = evenement.media|first %}
+        {% if image %}
+          <img src="{{ asset(image.chemindufichier) }}"
+               alt="{{ evenement.titre }}"
+               class="w-full h-full object-cover block transition-transform duration-700 ease-in-out group-hover:scale-[1.04]"/>
+        {% else %}
+          <img src="{{ asset('images/default.jpg') }}"
+               alt="image par défaut"
+               class="w-full h-full object-cover block transition-transform duration-700 ease-in-out group-hover:scale-[1.04]"/>
+        {% endif %}
+
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-br from-rouge-dark/20 to-transparent pointer-events-none"></div>
+
+        <!-- Badge -->
+        <span class="absolute top-5 left-5 bg-rouge text-or-light text-[.68rem] font-bold tracking-[.16em] uppercase px-[14px] py-[6px] rounded-full border border-or-light/30">
+          Événement
+        </span>
+
+      </div>
+
+      <!-- Infos -->
+      <div class="p-10 lg:p-12 flex flex-col justify-center border-t lg:border-t-0 lg:border-l border-brun/[.07]">
+
+        <span class="label-line text-[.72rem] font-semibold tracking-[.2em] uppercase text-or mb-[14px]">
+          Rovan'ny Manjakamiadana
+        </span>
+
+        <h1 class="font-serif text-[clamp(1.8rem,3vw,2.6rem)] font-bold leading-[1.15] text-rouge-dark mb-7">
+          {{ evenement.titre }}
+        </h1>
+
+        <!-- Meta list -->
+        <div class="flex flex-col gap-4">
+
+          <!-- Date -->
+          <div class="flex items-start gap-[14px] group/meta">
+            <div class="w-10 h-10 flex-shrink-0 bg-gris-clair rounded-lg flex items-center justify-center text-[1.1rem] transition-colors duration-200 group-hover/meta:bg-rouge/[.08]">
+              📅
+            </div>
+            <div class="pt-[3px]">
+              <span class="block text-[.72rem] font-semibold tracking-[.1em] uppercase text-gris mb-[3px]">Période</span>
+              <span class="text-[.95rem] font-medium text-brun">
+                Du <strong class="text-rouge-dark">{{ evenement.datedudebut|date('d/m/Y') }}</strong>
+                au <strong class="text-rouge-dark">{{ evenement.datedufin|date('d/m/Y') }}</strong>
+              </span>
+            </div>
+          </div>
+
+          <!-- Lieu -->
+          <div class="flex items-start gap-[14px] group/meta">
+            <div class="w-10 h-10 flex-shrink-0 bg-gris-clair rounded-lg flex items-center justify-center text-[1.1rem] transition-colors duration-200 group-hover/meta:bg-rouge/[.08]">
+              📍
+            </div>
+            <div class="pt-[3px]">
+              <span class="block text-[.72rem] font-semibold tracking-[.1em] uppercase text-gris mb-[3px]">Lieu</span>
+              <span class="text-[.95rem] font-medium text-brun">Rovan'ny Manjakamiadana</span>
+            </div>
+          </div>
+
+          <!-- Référence -->
+          <div class="flex items-start gap-[14px] group/meta">
+            <div class="w-10 h-10 flex-shrink-0 bg-gris-clair rounded-lg flex items-center justify-center text-[1.1rem] transition-colors duration-200 group-hover/meta:bg-rouge/[.08]">
+              🆔
+            </div>
+            <div class="pt-[3px]">
+              <span class="block text-[.72rem] font-semibold tracking-[.1em] uppercase text-gris mb-[3px]">Référence</span>
+              <span class="text-[.95rem] font-medium text-brun">#{{ evenement.id }}</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══ DESCRIPTION ══ -->
+    <div class="bg-blanc rounded-[10px] overflow-hidden shadow-card-sm mb-8 animate-fade-up-2">
+
+      <!-- Header -->
+      <div class="px-10 py-[26px] border-b border-brun/[.07] flex items-center gap-[14px]">
+        <div class="w-11 h-11 flex-shrink-0 bg-gradient-to-br from-rouge to-rouge-dark rounded-[10px] flex items-center justify-center text-[1.2rem]">
+          📝
+        </div>
+        <h2 class="font-serif text-[1.5rem] font-bold text-rouge-dark">Description complète</h2>
+      </div>
+
+      <!-- Body -->
+      <div class="px-10 py-9">
+        <p class="border-l-or pl-[22px] text-[.97rem] leading-[2] text-gris whitespace-pre-line text-justify">
+          {{ evenement.description }}
+        </p>
+      </div>
+
+    </div>
+
+    <!-- ══ ACTIONS ══ -->
+    <div class="bg-blanc rounded-[10px] px-10 py-7 shadow-card-sm flex items-center justify-between gap-4 flex-wrap animate-fade-up-3">
+
+      <p class="text-[.88rem] text-gris">
+        Découvrez nos autres <strong class="text-brun font-semibold">événements culturels</strong> au Rova.
+      </p>
+
+      <div class="flex gap-3 flex-wrap">
+
+        <a href="{{ path('app_interfacevisiteur') }}"
+           class="inline-flex items-center gap-2 px-7 py-3 bg-rouge text-creme text-[.85rem] font-semibold tracking-[.07em] uppercase rounded-[5px] no-underline transition-all duration-200 hover:bg-rouge-dark hover:-translate-y-[2px] hover:shadow-btn before:content-['←']">
+          Retour
+        </a>
+
+        <a href="{{ path('app_interfacevisiteur') }}#evenements"
+           class="inline-flex items-center gap-2 px-7 py-3 bg-transparent text-rouge border border-rouge text-[.85rem] font-semibold tracking-[.07em] uppercase rounded-[5px] no-underline transition-all duration-200 hover:bg-rouge hover:text-creme">
+          Voir autres événements →
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- Footer accent -->
+    <div class="mt-[52px] text-center pt-8 border-t border-brun/[.08]">
+      <div class="inline-flex items-center gap-3 text-or opacity-50 mb-[10px]
+                  before:content-[''] before:w-10 before:h-px before:bg-or
+                  after:content-['']  after:w-10  after:h-px  after:bg-or">
+        ✦
+      </div>
+      <p class="text-[.78rem] tracking-[.08em] uppercase text-gris/50">
+        © 2026 ORMada — Patrimoine Malagasy
+      </p>
+    </div>
+
+  </main>
+
+</body>
+</html>
