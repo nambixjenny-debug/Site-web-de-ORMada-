@@ -800,42 +800,84 @@ Partie actualités #}
 </section>
 
 {# SECTION À PROPOS #}
-<section id="apropos" class="py-16 md:py-20">
+<section id="apropos" class="py-16 md:py-24" style="background: var(--bg-secondary, #f9fafb);">
     <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-bold text-center mb-12 md:mb-16">
-            À propos de nous
-        </h2>
-        
-        <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-            <div class="bg-white shadow-lg rounded-xl p-6 text-center hover-lift">
-                <h3 class="font-bold text-xl mb-3">Qui sommes-nous ?</h3>
-                <p class="text-gray-600">
-                    ORMada est une organisation dédiée à la gestion et à la valorisation 
-                    du patrimoine culturel de Madagascar.
+
+        <div class="text-center mb-14">
+            <p class="text-xs font-medium tracking-widest uppercase mb-2" style="color:#9a6b3c;">Qui sommes-nous</p>
+            <h2 class="font-bold text-center mb-4" style="font-family:'Cormorant Garamond',serif; font-size:2.4rem; color:#111; line-height:1.2;">
+                À propos de l'ORMada
+            </h2>
+            <div class="mx-auto mb-4" style="width:48px; height:3px; background:#1a6641; border-radius:2px;"></div>
+            <p class="text-md font-light text-gray-500 max-w-xl mx-auto leading-relaxed">
+                L'Ofisin'ny Rovan'i Madagasikara (ORMada) est l'institution nationale dédiée à la
+                gestion, la conservation et la valorisation du Rovan'i Madagasikara — joyau du patrimoine culturel malgache.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+                {#
+            {{-- Carte 1 : Qui sommes-nous --}} #}
+            <div class="bg-white rounded-2xl p-7 relative overflow-hidden hover-lift transition"
+                 style="border: 0.5px solid #e5e5e5; border-top: 3px solid #1a6641;">
+                <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-5"
+                     style="background:#eaf5ee;">🏛️</div>
+                <h3 class="font-bold text-lg mb-3" >
+                    Qui sommes-nous ?
+                </h3>
+                <p class="text-gray-500 text-md leading-relaxed font-light mb-4">
+                    L'ORMada est un établissement public national à caractère industriel et commercial,
+                    créé par décret n°2021-580 du 26 mai 2021, placé sous la tutelle du ministère de la
+                    Communication et de la Culture. Il gère exclusivement le site du Rovan'i Madagasikara à Antananarivo.
                 </p>
+                <span class="inline-flex items-center gap-1 text-xs text-gray-500 px-3 py-1 rounded-lg"
+                      style="background:#f5f5f5;">
+                    <strong class="text-gray-800">Décret</strong> 26 mai 2021
+                </span>
             </div>
-            
-            <div class="bg-white shadow-lg rounded-xl p-6 text-center hover-lift">
-                <h3 class="font-bold text-xl mb-3">Histoire de l'ORMada</h3>
-                <p class="text-gray-600 mb-4">
-                    L'organisation contribue à la préservation des sites historiques 
-                    et culturels du pays.
+
+            {# {{-- Carte 2 : Histoire --}} #}
+            <div class="bg-white rounded-2xl p-7 relative overflow-hidden hover-lift transition"
+                 style="border: 0.5px solid #e5e5e5; border-top: 3px solid #9a6b3c;">
+                <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-5"
+                     style="background:#fdf3e3;">📜</div>
+                <h3 class="font-bold text-lg mb-3" >
+                    Histoire de l'ORMada
+                </h3>
+                <p class="text-gray-500 text-md leading-relaxed font-light mb-5">
+                    Après l'incendie tragique de 1995 et 28 ans de travaux de restauration,
+                    le Rovan'i Madagasikara a rouvert ses portes le 18 juin 2023. Depuis, plus de
+                    150 692 visiteurs ont redécouvert ce symbole de la royauté malgache, abritant
+                    des collections des 23 régions de Madagascar.
                 </p>
-                <button class="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition">
-                    En savoir plus
+                <button class="bg-black text-white text-sm px-5 py-2 rounded-lg hover:bg-gray-800 transition">
+                    En savoir plus →
                 </button>
             </div>
-            
-            <div class="bg-white shadow-lg rounded-xl p-6 text-center hover-lift">
-                <h3 class="font-bold text-xl mb-3">Nos Missions et Visions</h3>
-                <p class="text-gray-600">
-                    Assurer la protection durable du patrimoine malagasy et sensibiliser 
-                    les générations futures.
+
+            {# {{-- Carte 3 : Missions --}} #}
+            <div class="bg-white rounded-2xl p-7 relative overflow-hidden hover-lift transition"
+                 style="border: 0.5px solid #e5e5e5; border-top: 3px solid #2d4e8a;">
+                <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-5"
+                     style="background:#eef2fb;">🎯</div>
+                <h3 class="font-bold text-lg mb-3" >
+                    Nos Missions et Visions
+                </h3>
+                <p class="text-gray-500 text-md leading-relaxed font-light mb-4">
+                    Assurer la protection, la conservation, l'entretien, la restauration et la valorisation
+                    du site du Rovan'i Madagasikara. Transmettre le patrimoine matériel et immatériel malgache
+                    aux générations futures et le rayonner à l'échelle internationale.
                 </p>
+                <span class="inline-flex items-center gap-1 text-xs text-gray-500 px-3 py-1 rounded-lg"
+                      style="background:#f5f5f5;">
+                    <strong class="text-gray-800">+150 692</strong> visiteurs accueillis
+                </span>
             </div>
+
         </div>
     </div>
 </section>
+
 
 </main>
 
