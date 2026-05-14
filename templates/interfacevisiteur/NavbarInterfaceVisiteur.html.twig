@@ -1,0 +1,153 @@
+<!-- ================= HEADER NAVBAR PRO ================= -->
+<header class="fixed top-0 left-0 w-full bg-green-700 shadow-2xl z-50">
+
+    <!-- BARRE PRINCIPALE -->
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-4 md:px-6 py-3">
+
+        <!-- LOGO -->
+        <a href="{{ path('app_interfacevisiteur') }}"
+           class="flex items-center gap-3">
+
+            <img src="{{ asset('images/Logo.jpg') }}"
+                 class="h-12 w-12 rounded-full object-cover border-2 border-white shadow-md">
+
+            <span class="text-white font-bold text-xl tracking-wide">
+                ORMada
+            </span>
+        </a>
+
+        <!-- MENU DESKTOP -->
+        <nav class="hidden md:flex gap-8 text-white font-semibold">
+
+            <a href="{{ path('app_interfacevisiteur') }}#actualites"
+               class="hover:text-yellow-300 transition duration-300">
+               Actualité
+            </a>
+
+            <a href="{{ path('app_interfacevisiteur') }}#evenements"
+               class="hover:text-yellow-300 transition duration-300">
+               Événements
+            </a>
+
+            <a href="{{ path('app_interfacevisiteur') }}#informations"
+               class="hover:text-yellow-300 transition duration-300">
+               Infos
+            </a>
+
+            <a href="{{ path('app_interfacevisiteur') }}#apropos"
+               class="hover:text-yellow-300 transition duration-300">
+               À propos
+            </a>
+
+            <a href="{{ path('app_interfacevisiteur') }}#contacts"
+               class="hover:text-yellow-300 transition duration-300">
+               Contacts
+            </a>
+
+        </nav>
+
+        <!-- BOUTON MOBILE -->
+        <button onclick="toggleMobileMenu()"
+                class="md:hidden text-white text-3xl hover:text-yellow-300 transition">
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+<!-- ================= BACKDROP ================= -->
+<div id="backdrop"
+     class="hidden fixed inset-0 bg-black/50 z-40"
+     onclick="closeMobileMenu()">
+</div>
+
+<!-- ================= MENU MOBILE ================= -->
+<div id="mobileMenu"
+     class="fixed top-0 left-0 w-full bg-green-800 shadow-2xl z-50
+            transform -translate-y-full transition-transform duration-500 ease-out rounded-b-3xl">
+
+    <!-- TOP -->
+    <div class="flex justify-between items-center px-6 py-4 border-b border-white/20">
+
+        <a href="{{ path('app_interfacevisiteur') }}"
+           class="flex items-center gap-3">
+
+            <img src="{{ asset('images/Logo.jpg') }}"
+                 class="h-12 w-12 rounded-full object-cover border-2 border-white shadow-md">
+
+            <span class="text-white font-bold text-xl tracking-wide">
+                ORMada
+            </span>
+        </a>
+
+        <button onclick="closeMobileMenu()"
+                class="text-white text-3xl hover:text-red-300 transition">
+            ×
+        </button>
+
+    </div>
+
+    <!-- MENU -->
+    <nav class="flex flex-col text-white font-semibold px-6 py- gap-4">
+
+        <a href="{{ path('app_interfacevisiteur') }}#actualites"
+           onclick="closeMobileMenu()"
+           class="hover:bg-green-700 px-4 py-3 rounded-xl transition">
+           📰 Actualité
+        </a>
+
+        <a href="{{ path('app_interfacevisiteur') }}#evenements"
+           onclick="closeMobileMenu()"
+           class="hover:bg-green-700 px-4 py-3 rounded-xl transition">
+           📅 Événements
+        </a>
+
+        <a href="{{ path('app_interfacevisiteur') }}#informations"
+           onclick="closeMobileMenu()"
+           class="hover:bg-green-700 px-4 py-3 rounded-xl transition">
+           ℹ️ Infos
+        </a>
+
+        <a href="{{ path('app_interfacevisiteur') }}#apropos"
+           onclick="closeMobileMenu()"
+           class="hover:bg-green-700 px-4 py-3 rounded-xl transition">
+           🏛️ À propos
+        </a>
+
+        <a href="{{ path('app_interfacevisiteur') }}#contacts"
+           onclick="closeMobileMenu()"
+           class="hover:bg-green-700 px-4 py-3 rounded-xl transition">
+           📞 Contacts
+        </a>
+
+    </nav>
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const backdrop = document.getElementById('backdrop');
+
+    menu.classList.remove('-translate-y-full');
+    menu.classList.add('translate-y-0');
+
+    backdrop.classList.remove('hidden');
+
+    document.body.style.overflow = "hidden";
+}
+
+function closeMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const backdrop = document.getElementById('backdrop');
+
+    menu.classList.add('-translate-y-full');
+    menu.classList.remove('translate-y-0');
+
+    backdrop.classList.add('hidden');
+
+    document.body.style.overflow = "";
+}
+</script>

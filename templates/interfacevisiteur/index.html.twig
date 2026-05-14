@@ -18,19 +18,19 @@
         }
 
         body{
-    font-family: 'Inter', sans-serif;
-}
+            font-family: 'Inter', sans-serif;
+        }
 
-/* Titres principaux */
-h1, h2{
-    font-family: 'Playfair Display', serif;
-    letter-spacing: 0.5px;
-}
+        /* Titres principaux */
+        h1, h2{
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.5px;
+        }
 
-/* Sous-titres */
-h3, h4, h5{
-    font-family: 'Poppins', sans-serif;
-}
+        /* Sous-titres */
+        h3, h4, h5{
+            font-family: 'Poppins', sans-serif;
+        }
         .fade-in {
             animation: fadeIn 0.8s ease-out;
         }
@@ -57,44 +57,7 @@ h3, h4, h5{
 <body class="bg-gray-50 scroll-auto min-h-screen flex flex-col">
 
 {# HEADER / NAVBAR #}
-<header class="fixed top-0 left-0 w-full bg-green-600 shadow-lg z-50">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-4 md:px-6 py-3">
-        {# Logo et nom #}
-       <div class="flex items-center gap-2 md:gap-3">
-            <img src="{{ asset('images/Logo.jpg') }}"
-                alt="Blason de Madagascar" 
-                class="h-12 w-12 md:h-15 md:w-15 rounded-full object-cover">
-            <span class="text-white font-bold text-lg md:text-xl">ORMada</span>
-        </div>
-
-        {# Navigation desktop #}
-        <nav class="hidden md:flex gap-6 lg:gap-8 text-white font-semibold">
-            <a href="#actualites" class="hover:text-yellow-300 transition duration-300">Actualité</a>
-            <a href="#evenements" class="hover:text-yellow-300 transition duration-300">Événements</a>
-            <a href="#informations" class="hover:text-yellow-300 transition duration-300">Infos</a>
-            <a href="#apropos" class="hover:text-yellow-300 transition duration-300">À propos</a>
-            <a href="#contacts" class="hover:text-yellow-300 transition duration-300">Contacts</a>
-        </nav>
-
-        {# Bouton menu mobile #}
-        <button class="md:hidden text-white" onclick="toggleMobileMenu()" aria-label="Menu">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
-    </div>
-
-    {# Menu mobile #}
-    <div id="mobileMenu" class="hidden md:hidden bg-green-700 px-4 py-3">
-        <nav class="flex flex-col gap-3 text-white font-semibold">
-            <a href="#actualites" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">Actualité</a>
-            <a href="#evenements" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">Événements</a>
-            <a href="#informations" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">Infos</a>
-            <a href="#apropos" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">À propos</a>
-            <a href="#contacts" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">Contacts</a>
-        </nav>
-    </div>
-</header>
+{% include 'interfacevisiteur/NavbarInterfaceVisiteur.html.twig' %}
 
 {# MAIN CONTENT #}
 <main>
@@ -1113,11 +1076,7 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Gestion du menu mobile
-function toggleMobileMenu() {
-    const menu = document.getElementById('mobileMenu');
-    menu.classList.toggle('hidden');
-}
+
 
 document.addEventListener("DOMContentLoaded", function () {
 

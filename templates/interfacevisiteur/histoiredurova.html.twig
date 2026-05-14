@@ -14,45 +14,7 @@
 </head>
 <body class="bg-stone-50 text-stone-800 font-sans">
 
-    <header class="fixed top-0 left-0 w-full bg-green-600 shadow-lg z-50">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-4 md:px-6 py-3">
-        {# Logo et nom #}
-       <div class="flex items-center gap-2 md:gap-3">
-            <img src="{{ asset('images/Logo.jpg') }}"
-                alt="Blason de Madagascar" 
-                class="h-12 w-12 md:h-15 md:w-15 rounded-full object-cover">
-            <span class="text-white font-bold text-lg md:text-xl">ORMada</span>
-        </div>
-
-        {# Navigation desktop #}
-        <nav class="hidden md:flex gap-6 lg:gap-8 text-white font-semibold">
-            <a href="{{ path('app_interfacevisiteur') }}#actualites" class="hover:text-yellow-300 transition duration-300">Actualité</a>
-            <a href="{{ path('app_interfacevisiteur') }}#evenements" class="hover:text-yellow-300 transition duration-300">Événements</a>
-            <a href="{{ path('app_interfacevisiteur') }}#informations" class="hover:text-yellow-300 transition duration-300">Infos</a>
-            <a href="{{ path('app_interfacevisiteur') }}#apropos" class="hover:text-yellow-300 transition duration-300">À propos</a>
-            <a href="{{ path('app_interfacevisiteur') }}#contacts" class="hover:text-yellow-300 transition duration-300">Contacts</a>
-        </nav>
-     
-
-        {# Bouton menu mobile #}
-        <button class="md:hidden text-white" onclick="toggleMobileMenu()" aria-label="Menu">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
-    </div>
-
-    {# Menu mobile #}
-    <div id="mobileMenu" class="hidden md:hidden bg-green-700 px-4 py-3">
-        <nav class="flex flex-col gap-3 text-white font-semibold">
-            <a href="{{ path('app_interfacevisiteur') }}#actualites" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">Actualité</a>
-            <a href="{{ path('app_interfacevisiteur') }}#evenements" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">Événements</a>
-            <a href="{{ path('app_interfacevisiteur') }}#informations" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">Infos</a>
-            <a href="{{ path('app_interfacevisiteur') }}#apropos" onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">À propos</a>
-            <a href="{{ path('app_interfacevisiteur') }}#contacts"  onclick="toggleMobileMenu()" class="py-2 hover:bg-green-600 px-3 rounded">Contacts</a>
-        </nav>
-    </div>
-</header>
+    {% include 'interfacevisiteur/NavbarInterfaceVisiteur.html.twig' %}
 
     <!-- Hero Section -->
     <section class="h-[75vh] flex items-center justify-center text-center text-white px-4  bg-cover bg-center"
@@ -356,11 +318,7 @@ style="background-image:url('{{ asset('images/fondRova.jpg') }}')">
 </footer>
 
     <script>
-    // Gestion du menu mobile
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        }
+    
         // Animation au défilement (Scroll Reveal)
         const observerOptions = { threshold: 0.1 };
         const observer = new IntersectionObserver((entries) => {
