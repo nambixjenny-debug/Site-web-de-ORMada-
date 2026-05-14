@@ -78,6 +78,7 @@ final class ActualiteController extends AbstractController
         ]);
     }
 
+
     #[Route('/{id}/edit', name: 'app_actualite_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request, 

@@ -175,7 +175,11 @@ Partie actualités #}
                                         {{ actualite.contenu }}...
                                     </p> #}
                                     <p class="whitespace-pre-line leading-relaxed">
-                                        {{ actualite.contenu|slice(0, 200) }} <a  href="#" class="text-black font-bold">...Voir plus </a>   
+                                        {{ actualite.contenu|slice(0, 200) }} 
+                                        <a href="{{ path('app_showActualite', {'id': actualite.id}) }}"
+                                            class="text-black-700 font-semibold hover:underline">
+                                            ...Voir plus 
+                                        </a>   
                                     </p>
 
                                 </div>
@@ -397,7 +401,7 @@ Partie actualités #}
                             {{ evenement.description|slice(0,120) }}...
                         </p>
 
-                        <a href="{{ path('app_ShowEvenement', {'id': evenement.id}) }}"
+                        <a href="{{ path('app_showevenement', {'id': evenement.id}) }}"
                            class="text-green-600 font-semibold hover:underline">
                             Voir plus →
                         </a>
