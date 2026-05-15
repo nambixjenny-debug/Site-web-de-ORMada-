@@ -59,6 +59,12 @@
                             <span class="font-medium">Media</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ path('app_user_index') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200 text-white {% if app.request.attributes.get('_route') == 'app_user_index' %}bg-teal-500{% endif %}">
+                            <span class="text-lg">👤</span>
+                            <span class="font-medium">UserAdmin</span>
+                        </a>
+                    </li>
                 </ul>
 
                 <!-- Separator -->
