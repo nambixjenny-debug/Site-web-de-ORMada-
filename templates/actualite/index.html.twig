@@ -23,98 +23,92 @@
                 </div>
 
                 <form method="get">
-<div class="flex flex-col md:flex-row items-stretch md:items-center gap-3">
+                    <div class="flex flex-col md:flex-row items-stretch md:items-center gap-3">
 
-    <!-- RECHERCHE -->
-    <div class="flex-1">
+                        <!-- RECHERCHE -->
+                        <div class="flex-1">
 
-        <div class="relative">
+                            <div class="relative">
 
-            <input
-                type="text"
-                name="search"
-                value="{{ app.request.get('search') }}"
-                placeholder="Titre ou contenu..."
-                class="w-full px-4 py-2.5 pr-11
-                       rounded-xl
-                       border border-gray-200
-                       bg-gray-50
-                       text-sm text-gray-700
-                       placeholder-gray-400
-                       focus:bg-white
-                       focus:ring-2 focus:ring-emerald-500
-                       focus:border-emerald-500
-                       focus:outline-none
-                       transition duration-300"
-            >
+                                <input
+                                    type="text"
+                                    name="search"
+                                    value="{{ app.request.get('search') }}"
+                                    placeholder="Titre ou contenu..."
+                                    class="w-full px-4 py-2.5 pr-11
+                                        rounded-xl
+                                        border border-gray-200
+                                        bg-gray-50
+                                        text-sm text-gray-700
+                                        placeholder-gray-400
+                                        focus:bg-white
+                                        focus:ring-2 focus:ring-emerald-500
+                                        focus:border-emerald-500
+                                        focus:outline-none
+                                        transition duration-300"
+                                >
 
-        </div>
+                            </div>
 
-    </div>
+                        </div>
 
-    <!-- STATUS -->
-    <div class="w-[40px] md:w-22">
+                        <!-- STATUS -->
+                        <div class="w-[40px] md:w-22">
 
-        <select
-            name="publier"
-            class="w-full px-4 py-2.5
-                   rounded-xl
-                   border border-gray-200
-                   bg-gray-50
-                   text-sm text-gray-700
-                   focus:bg-white
-                   focus:ring-2 focus:ring-emerald-500
-                   focus:border-emerald-500
-                   focus:outline-none
-                   transition duration-300">
+                            <select
+                                name="publier"
+                                class="w-full px-4 py-2.5
+                                    rounded-xl
+                                    border border-gray-200
+                                    bg-gray-50
+                                    text-sm text-gray-700
+                                    focus:bg-white
+                                    focus:ring-2 focus:ring-emerald-500
+                                    focus:border-emerald-500
+                                    focus:outline-none
+                                    transition duration-300">
 
-            <option value="">Tous</option>
+                                <option value="">Tous</option>
 
-            <option value="1"
-                {% if app.request.get('publier') == '1' %}
-                    selected
-                {% endif %}
-            >
-                Publié
-            </option>
+                                <option value="1"
+                                    {% if app.request.get('publier') == '1' %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    Publié
+                                </option>
 
-            <option value="0"
-                {% if app.request.get('publier') == '0' %}
-                    selected
-                {% endif %}
-            >
-                Non publié
-            </option>
+                                <option value="0"
+                                    {% if app.request.get('publier') == '0' %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    Non publié
+                                </option>
 
-        </select>
+                            </select>
 
-    </div>
+                        </div>
 
-    <!-- BUTTON -->
-    <div>
+                        <!-- BUTTON -->
+                        <div>
 
-        <button
-            type="submit"
-            class="w-full md:w-auto px-5 py-2.5 rounded-xl
-                   bg-emerald-700 hover:bg-emerald-800
-                   text-sm text-white font-semibold
-                   shadow-md hover:shadow-xl
-                   transition duration-300">
+                            <button
+                                type="submit"
+                                class="w-full md:w-auto px-5 py-2.5 rounded-xl
+                                    bg-emerald-700 hover:bg-emerald-800
+                                    text-sm text-white font-semibold
+                                    shadow-md hover:shadow-xl
+                                    transition duration-300">
 
-            Rechercher
+                                Rechercher
 
-        </button>
+                            </button>
 
-    </div>
+                        </div>
 
-</div>
-
-  
-
-   
-   
-
-</form>
+                    </div>
+                </form>
 
                 <a href="{{ path('app_actualite_new') }}"
                 class="inline-flex items-center justify-center gap-1 px-6 py-2 bg-emerald-500 hover:bg-emerald-600 rounded-2xl  text-white font-semibold shadow-lg hover:shadow-2xl hover:-translate-y-1 transition duration-300">

@@ -34,6 +34,56 @@ class EvenementRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+// Recherche d'événements avec des critères de recherche
+    public function searchEvenements(
+        ?string $search,
+        ?string $dateDebut,
+        ?string $dateFin
+    ): array
+    {
+        $qb = $this->createQueryBuilder('e');
+
+        if ($search) {
+
+            $qb->andWhere('
+                e.titre LIKE :search
+                OR e.description LIKE :search
+            ')
+            ->setParameter(
+                'search',
+                '%' . $search . '%'
+            );
+        }
+
+        if ($dateDebut) {
+
+            $qb->andWhere(
+                'e.datedudebut >= :dateDebut'
+            )
+            ->setParameter(
+                'dateDebut',
+                $dateDebut
+            );
+        }
+
+        if ($dateFin) {
+
+            $qb->andWhere(
+                'e.datedufin <= :dateFin'
+            )
+            ->setParameter(
+                'dateFin',
+                $dateFin
+            );
+        }
+
+    
+        $qb->orderBy('e.datedudebut', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 //    /**
 //     * @return Evenement[] Returns an array of Evenement objects
 //     */

@@ -16,10 +16,25 @@ use App\Entity\Media;
 final class EvenementController extends AbstractController
 {
     #[Route(name: 'app_evenement_index', methods: ['GET'])]
-    public function index(EvenementRepository $evenementRepository): Response
+    public function index(
+        Request $request,
+        EvenementRepository $evenementRepository
+    ): Response
     {
+        $search = $request->query->get('search');
+
+        $dateDebut = $request->query->get('date_debut');
+
+        $dateFin = $request->query->get('date_fin');
+
+        $evenements = $evenementRepository->searchEvenements(
+            $search,
+            $dateDebut,
+            $dateFin
+        );
+
         return $this->render('evenement/index.html.twig', [
-            'evenements' => $evenementRepository->findAll(),
+            'evenements' => $evenements,
         ]);
     }
 
