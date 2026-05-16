@@ -19,6 +19,11 @@
         <!-- MENU DESKTOP -->
         <nav class="hidden md:flex gap-8 text-white font-semibold">
 
+            <a href="{{ path('app_interfacevisiteur') }}#Accueil"
+                class="hover:text-yellow-300 transition duration-300">
+                Accueil 
+            </a>
+
             <a href="{{ path('app_interfacevisiteur') }}#actualites"
                class="hover:text-yellow-300 transition duration-300 ">
                Actualités
@@ -91,6 +96,11 @@
     <!-- MENU -->
     <nav class="flex flex-col text-white font-semibold px-6 py- gap-4">
 
+        <a href="{{ path('app_interfacevisiteur') }}#Accueil"
+           onclick="closeMobileMenu()"
+           class="hover:bg-green-700 px-4 py-3 rounded-xl transition mt-6">
+            📰 Accueil
+        </a>
         <a href="{{ path('app_interfacevisiteur') }}#actualites"
            onclick="closeMobileMenu()"
            class="hover:bg-green-700 px-4 py-3 rounded-xl transition mt-6">
