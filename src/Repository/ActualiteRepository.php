@@ -36,6 +36,31 @@ class ActualiteRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+    public function rechercheActualite(?string $search,?string $publier): array
+        {
+
+            $qb = $this->createQueryBuilder('a');
+
+            if($search){
+
+                $qb->andWhere('a.titre LIKE :search
+                                    OR a.contenu LIKE :search')
+
+                ->setParameter( 'search','%' . $search . '%' );
+            }
+
+            if($publier !== null && $publier !== ''){
+
+                $qb->andWhere('a.dejapublier = :publier')
+
+                ->setParameter(  'publier', $publier);
+            }
+
+            $qb->orderBy('a.publierle', 'DESC');
+
+            return $qb->getQuery()->getResult();
+        }
+
   
 
 //    /**

@@ -12,14 +12,28 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+
 #[Route('/actualite')]
 final class ActualiteController extends AbstractController
 {
+    
+
     #[Route(name: 'app_actualite_index', methods: ['GET'])]
-    public function index(ActualiteRepository $actualiteRepository): Response
+    public function index(
+        Request $request,
+        ActualiteRepository $actualiteRepository
+    ): Response
     {
+        $search = $request->query->get('search');
+        $publier = $request->query->get('publier');
+
+        $actualites = $actualiteRepository->rechercheActualite(
+            $search,
+            $publier
+        );
+
         return $this->render('actualite/index.html.twig', [
-            'actualites' => $actualiteRepository->findAll(),
+            'actualites' => $actualites,
         ]);
     }
 
