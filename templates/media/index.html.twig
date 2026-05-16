@@ -4,23 +4,40 @@
 
 {% block body %}
 
-<div class="max-w-7xl mx-auto px-6 py-10">
+<div class="h-screen overflow-hidden bg-gradient-to-br from-slate-100 via-emerald-50 to-white flex flex-col">
 
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-800">
-            Gestion des Médias
-        </h1>
+    <!-- HEADER -->
+    <section class="shrink-0 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-600 shadow-2xl">
 
-        <a href="{{ path('app_media_new') }}"
-           class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg shadow transition">
-            + Ajouter un Média
-        </a>
-    </div>
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+
+            <div>
+
+                <h1 class="text-4xl font-bold text-white">
+                    Gestion des medias
+                </h1>
+
+                <p class="text-emerald-100 mt-2 text-sm tracking-wide">
+                    Administration ORMada
+                </p>
+
+            </div>
+
+            <a href="{{ path('app_media_new') }}"
+               class="inline-flex items-center justify-center gap-1 px-6 py-2 bg-emerald-500 hover:bg-emerald-600 rounded-2xl  text-white font-semibold shadow-lg hover:shadow-2xl hover:-translate-y-1 transition duration-300">
+
+                <span class="text-xl">+</span>
+                <span>Créer un media</span>
+
+            </a>
+
+        </div>
+
+    </section>
 
 
     <!-- Table Container -->
-    <div class="bg-white shadow-lg rounded-xl overflow-hidden">
+    <div class="bg-white shadow-lg rounded-xl overflow-hidden mt-3 border border-green-100">
 
         <table class="min-w-full divide-y divide-gray-200">
 
