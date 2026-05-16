@@ -552,76 +552,125 @@ Partie actualités #}
 
 
         {# Modal qui affiche tous les fady liés au Rova de Manjakamiadana #}
+                
+                {# Modal qui affiche tous les fady liés au Rova de Manjakamiadana #}
 
         <div id="fadyModal"
-            class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
+            class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4 overflow-y-auto">
 
-            <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full p-8 relative">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full relative
+            max-h-[90vh] overflow-y-auto no-scrollbar">
 
-                <button onclick="closeFadyModal()" class="absolute top-3 right-3 text-gray-600 hover:text-red-600 text-xl">
-                     ✖
-                </button>
+                <!-- HEADER -->
+                <div class="sticky top-0 bg-white z-10 border-b border-gray-200 px-6 py-5 rounded-t-2xl flex items-center justify-between">
 
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
-                    Les Fady du Rova d'Antananarivo
-                </h2>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
+                        Les Fady du Rova d'Antananarivo
+                    </h2>
 
-                <div class="flex gap-3 mb-[20px]">
-                    <span class="text-red-600 text-xl">🚫</span>
-                    <p>
-                        Il est interdit de pointer du doigt les tombes royales ou les palais. 
-                        Ce geste est considéré comme irrespectueux envers les ancêtres et les souverains 
-                        qui reposent sur le site. Il est préférable d’indiquer avec la main ouverte par respect.
-                    </p>
-                </div>
-
-                <div class="flex gap-3 mb-[20px]">
-                    <span class="text-red-600 text-xl">📷</span>
-                    <p>
-                        La prise de photos peut être interdite dans certaines zones sacrées du Rova. 
-                        Ces restrictions visent à préserver le caractère spirituel et la dignité des lieux. 
-                        Il est recommandé de toujours demander l’autorisation avant de photographier.
-                    </p>
-                </div>
-
-                <div class="flex gap-3 mb-[20px]">
-                    <span class="text-red-600 text-xl">🕊</span>
-                    <p>
-                        Les tombes des rois et reines sont des lieux sacrés. Les visiteurs doivent éviter 
-                        de marcher ou de s’asseoir à proximité de ces espaces et adopter une attitude respectueuse, 
-                        car ils sont considérés comme des lieux de mémoire et de recueillement.
-                    </p>
-                </div>
-
-                <div class="flex gap-3 mb-[20px]">
-                    <span class="text-red-600 text-xl">🙏</span>
-                    <p>
-                        Un comportement respectueux est exigé sur l’ensemble du site. Cela inclut une tenue correcte, 
-                        une attitude calme et le respect des consignes données par les guides ou les responsables du Rova.
-                    </p>
-                </div>
-
-                <div class="flex gap-3 mb-[20px]">
-                    <span class="text-red-600 text-xl">🍽</span>
-                    <p>
-                        Certains aliments peuvent être interdits selon les traditions locales (fady). 
-                        Ces interdits varient selon les croyances et les coutumes. Il est conseillé 
-                        de se renseigner auprès des guides pour éviter toute offense culturelle.
-                    </p>
-                </div>
-
-                <div class="flex gap-3">
-                    <span class="text-red-600 text-xl">🤫</span>
-                    <p>
-                        Le silence et le calme sont fortement recommandés dans les zones sacrées. 
-                        Faire du bruit ou perturber l’environnement peut être perçu comme un manque de respect 
-                        envers les ancêtres et l’importance spirituelle du lieu.
-                    </p>
-                </div>
+                    <button onclick="closeFadyModal()"
+                        class="text-gray-600 hover:text-red-600 text-2xl font-bold transition">
+                        ✖
+                    </button>
 
                 </div>
+
+                <!-- CONTENT -->
+                <div class="p-6 md:p-8">
+
+                    <div class="flex gap-3 mb-[20px] text-justify">
+
+                        <span class="text-red-600 text-xl shrink-0">🚫</span>
+
+                        <p class="text-gray-700 leading-relaxed">
+                            Il est interdit de pointer du doigt les tombes royales ou les palais. 
+                            Ce geste est considéré comme irrespectueux envers les ancêtres et les souverains 
+                            qui reposent sur le site. Il est préférable d’indiquer avec la main ouverte par respect.
+                        </p>
+
+                    </div>
+
+                    <div class="flex gap-3 mb-[20px]">
+
+                        <span class="text-red-600 text-xl shrink-0">📷</span>
+
+                        <p class="text-gray-700 leading-relaxed">
+                            La prise de photos peut être interdite dans certaines zones sacrées du Rova. 
+                            Ces restrictions visent à préserver le caractère spirituel et la dignité des lieux. 
+                            Il est recommandé de toujours demander l’autorisation avant de photographier.
+                        </p>
+
+                    </div>
+
+                    <div class="flex gap-3 mb-[20px]">
+
+                        <span class="text-red-600 text-xl shrink-0">🕊</span>
+
+                        <p class="text-gray-700 leading-relaxed">
+                            Les tombes des rois et reines sont des lieux sacrés. Les visiteurs doivent éviter 
+                            de marcher ou de s’asseoir à proximité de ces espaces et adopter une attitude respectueuse, 
+                            car ils sont considérés comme des lieux de mémoire et de recueillement.
+                        </p>
+
+                    </div>
+
+                    <div class="flex gap-3 mb-[20px]">
+
+                        <span class="text-red-600 text-xl shrink-0">🙏</span>
+
+                        <p class="text-gray-700 leading-relaxed">
+                            Un comportement respectueux est exigé sur l’ensemble du site. Cela inclut une tenue correcte, 
+                            une attitude calme et le respect des consignes données par les guides ou les responsables du Rova.
+                        </p>
+
+                    </div>
+
+                    <div class="flex gap-3 mb-[20px]">
+
+                        <span class="text-red-600 text-xl shrink-0">🍽</span>
+
+                        <p class="text-gray-700 leading-relaxed">
+                            Certains aliments peuvent être interdits selon les traditions locales (fady). 
+                            Ces interdits varient selon les croyances et les coutumes. Il est conseillé 
+                            de se renseigner auprès des guides pour éviter toute offense culturelle.
+                        </p>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <span class="text-red-600 text-xl shrink-0">🤫</span>
+
+                        <p class="text-gray-700 leading-relaxed">
+                            Le silence et le calme sont fortement recommandés dans les zones sacrées. 
+                            Faire du bruit ou perturber l’environnement peut être perçu comme un manque de respect 
+                            envers les ancêtres et l’importance spirituelle du lieu.
+                        </p>
+
+                    </div>
+
+                </div>
+
             </div>
 
+        </div>
+
+        <style>
+
+            /* Cache la scrollbar mais garde le scroll */
+            .no-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .no-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+
+        </style>
+       
+
+        
 {#      Inforamtion sur les tarifs d'entrée du Rova de Manjakamiadana #}
             
             <div class="max-w-4xl mx-auto ">
